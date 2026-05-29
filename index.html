@@ -15,39 +15,24 @@
     <div class="sidebar" id="sidebar">
         <div class="logo-container">
             <div class="logo-info">
-                <h2 class="text">Interfaz Seguimiento</h2>
-                <span class="text">Torre de Control</span>
+                <h2 class="text">Torre de Control</h2>
+                <span class="text">Hub Operativo</span>
             </div>
             <button id="toggle-btn" onclick="toggleSidebar()">
                 <span class="material-symbols-outlined" id="toggle-icon">menu_open</span>
             </button>
         </div>
         
-        <div class="menu-section text">Planillas Estratégicas</div>
-        <button class="tablinks active" onclick="abrirPestana(event, 'SP_Priorizaciones')"><span class="material-symbols-outlined icon">format_list_numbered</span><span class="text">Priorizaciones</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_CasosVIP')"><span class="material-symbols-outlined icon">workspace_premium</span><span class="text">Casos VIP</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_NoPago')"><span class="material-symbols-outlined icon">warning</span><span class="text">SP No Pago (Incid.)</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_Tottus')"><span class="material-symbols-outlined icon">storefront</span><span class="text">Tottus - Farfana</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_Ikea')"><span class="material-symbols-outlined icon">inventory_2</span><span class="text">IKEA</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_MantenedorIA')"><span class="material-symbols-outlined icon">smart_toy</span><span class="text">Mantenedor IA</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_Comunicaciones')"><span class="material-symbols-outlined icon">sync_alt</span><span class="text">Comunicaciones</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SP_TiendasFlujo')"><span class="material-symbols-outlined icon">local_shipping</span><span class="text">Tiendas Flujo PM</span></button>
+        <div class="profile-section">
+            <select id="team-profile-selector" onchange="cambiarPerfil()"></select>
+            <div class="profile-buttons">
+                <button class="btn-edit-profile" onclick="crearNuevoPerfil()" title="Crear Nuevo Perfil"><span class="material-symbols-outlined">add_circle</span></button>
+                <button class="btn-edit-profile" onclick="eliminarPerfilActual()" title="Eliminar Perfil"><span class="material-symbols-outlined">delete</span></button>
+                <button class="btn-edit-profile" onclick="abrirModalPerfil()" title="Personalizar Pestañas"><span class="material-symbols-outlined">tune</span></button>
+            </div>
+        </div>
 
-        <div class="menu-section text">🚀 SimpliRoute</div>
-        <button class="tablinks" onclick="abrirPestana(event, 'SR_Login')"><span class="material-symbols-outlined icon">login</span><span class="text">Login / Sesión</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SR_Principal')"><span class="material-symbols-outlined icon">route</span><span class="text">Página Principal</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SR_Flotas')"><span class="material-symbols-outlined icon">directions_car</span><span class="text">Flotas</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SR_Seguimiento')"><span class="material-symbols-outlined icon">share_location</span><span class="text">Seguimiento</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'SR_Extensiones')"><span class="material-symbols-outlined icon">extension</span><span class="text">Extensiones</span></button>
-
-        <div class="menu-section text">🌍 Geosort</div>
-        <button class="tablinks" onclick="abrirPestana(event, 'GS_Reporte')"><span class="material-symbols-outlined icon">analytics</span><span class="text">Reporte Planificación</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'GS_Seguimiento')"><span class="material-symbols-outlined icon">radar</span><span class="text">Seguimiento</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'GS_AdminRutas')"><span class="material-symbols-outlined icon">edit_road</span><span class="text">Admin Rutas</span></button>
-        <button class="tablinks" onclick="abrirPestana(event, 'GS_PlanifSectores')"><span class="material-symbols-outlined icon">map</span><span class="text">Planif. Sectores</span></button>
-
-        <div class="menu-section text">Herramientas</div>
-        <button class="tablinks" onclick="abrirPestana(event, 'Notas_Mensajes')"><span class="material-symbols-outlined icon">quickreply</span><span class="text">Plantillas Rápidas</span></button>
+        <div id="sidebar-menu-container"></div>
     </div>
 
     <div class="main-content">
@@ -60,11 +45,16 @@
                 <span class="material-symbols-outlined">restart_alt</span> Restaurar Vista
             </button>
             
+            <button class="btn-control" onclick="traerSimpliAlFrente()" style="background-color: #F0A83D; color: white; border: none;">
+                <span class="material-symbols-outlined">flip_to_front</span> Traer Simpli al Frente
+            </button>
+            
             <div class="pet-selector-container">
                 <span class="material-symbols-outlined" style="color:#64748b; font-size: 18px;">pets</span>
                 <select id="pet-selector" class="btn-control" onchange="cambiarMascota()">
                     <option value="corgi">Corgi</option>
-                    <option value="lion">León</option> <option value="cat">Gatito</option>
+                    <option value="lion">León</option>
+                    <option value="cat">Gatito</option>
                     <option value="panda">Panda</option>
                     <option value="fox">Zorro</option>
                 </select>
@@ -73,52 +63,27 @@
 
         <div id="views-container" class="views-container">
             
-            <div id="SP_Priorizaciones" class="tabcontent active-tab"><div class="window-header">📊 Priorizaciones</div><iframe src="https://docs.google.com/spreadsheets/d/1Hz9wfvFXF5Dgm15_hB-AI3C2NHhbWDZvr3QvFYNlNuU/edit?rm=minimal&gid=571943419"></iframe></div>
+            <div id="SP_Priorizaciones" class="tabcontent"><div class="window-header">📊 Priorizaciones</div><iframe src="https://docs.google.com/spreadsheets/d/1Hz9wfvFXF5Dgm15_hB-AI3C2NHhbWDZvr3QvFYNlNuU/edit?rm=minimal&gid=571943419"></iframe></div>
             <div id="SP_CasosVIP" class="tabcontent"><div class="window-header">⭐ Casos VIP</div><iframe src="https://docs.google.com/spreadsheets/d/1WZFvfZiXTHaQVlzTArw0IWvWiU_IeRR2iSApdryRRGo/edit?rm=minimal&gid=0"></iframe></div>
             <div id="SP_NoPago" class="tabcontent"><div class="window-header">⚠️ SP No Pago (Incidencias)</div><iframe src="https://docs.google.com/spreadsheets/d/1mWVya7R5FF3IFDpHOwqxlL1OaxZGFYND9mbbHtPtXb8/edit?rm=minimal&gid=736947450"></iframe></div>
             <div id="SP_Tottus" class="tabcontent"><div class="window-header">🛒 Tottus - Farfana</div><iframe src="https://docs.google.com/spreadsheets/d/1dXqvCb4i6PPO9aJyipxPEMMESZ9rzUHSduUPVvNV-qM/edit?rm=minimal&gid=1182565167"></iframe></div>
-            <div id="SP_Ikea" class="tabcontent"><div class="window-header">🇸🇪 IKEA</div><iframe src="https://docs.google.com/spreadsheets/d/1Y1p99h1IIvCaTdOLKDXwCn5fs8Q5UfViwWxh8ehgDQ/edit?rm=minimal&gid=515805043"></iframe></div>
+            <div id="SP_Ikea" class="tabcontent"><div class="window-header">🇸🇪 IKEA</div><iframe src="https://docs.google.com/spreadsheets/d/1Y1p99h1IIvCaTdOLKDXwCn5fs8Q5UfViwqWxh8ehgDQ/edit?rm=minimal&gid=515805043"></iframe></div>
             <div id="SP_MantenedorIA" class="tabcontent"><div class="window-header">🤖 Mantenedor IA</div><iframe src="https://docs.google.com/spreadsheets/d/17ea0Fdmj9xFsVj1qp1dZLPXiLl6d_5Wg5Ye0M-PV6wg/edit?rm=minimal&gid=0"></iframe></div>
             <div id="SP_Comunicaciones" class="tabcontent"><div class="window-header">🔄 Comunicaciones</div><iframe src="https://docs.google.com/spreadsheets/d/1KACx_rsI4g63lMS_lt8EIcAp6l7cY8aaRa9TZw0YBnQ/edit?rm=minimal&gid=543420077"></iframe></div>
             <div id="SP_TiendasFlujo" class="tabcontent"><div class="window-header">📦 Tiendas Flujo PM</div><iframe src="https://docs.google.com/spreadsheets/d/1IcP9k2RsE5CqdUjDepTbrN7eQ8DOkE9ctiVqhkdIxBY/edit?rm=minimal&gid=0"></iframe></div>
 
-            <div id="SR_Login" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Login</div><iframe src="https://app2.simpliroute.com/#/login"></iframe></div>
             <div id="SR_Principal" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Principal</div><iframe src="https://app2.simpliroute.com/#/planner/vehicles"></iframe></div>
-            
-            <div id="SR_Flotas" class="tabcontent">
-                <div class="window-header">🚀 SimpliRoute: Flotas</div>
-                <div class="launcher-container">
-                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
-                    <h3>Apertura Externa Requerida</h3>
-                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
-                    <a href="https://app3.simpliroute.com/settings/fleets" target="_blank" class="btn-launcher">Abrir Flotas ↗️</a>
-                </div>
-            </div>
-
-            <div id="SR_Seguimiento" class="tabcontent">
-                <div class="window-header">🚀 SimpliRoute: Seguimiento</div>
-                <div class="launcher-container">
-                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
-                    <h3>Apertura Externa Requerida</h3>
-                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
-                    <a href="https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959" target="_blank" class="btn-launcher">Abrir Seguimiento ↗️</a>
-                </div>
-            </div>
-
-            <div id="SR_Extensiones" class="tabcontent">
-                <div class="window-header">🚀 SimpliRoute: Extensiones</div>
-                <div class="launcher-container">
-                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
-                    <h3>Apertura Externa Requerida</h3>
-                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
-                    <a href="https://app3.simpliroute.com/es/extensions" target="_blank" class="btn-launcher">Abrir Extensiones ↗️</a>
-                </div>
-            </div>
 
             <div id="GS_Reporte" class="tabcontent"><div class="window-header">🌍 Geosort: Reporte</div><iframe src="https://geosort.falabella.com/app/reporter"></iframe></div>
             <div id="GS_Seguimiento" class="tabcontent"><div class="window-header">🌍 Geosort: Seguimiento</div><iframe src="https://geosort.falabella.com/app/tracingV1"></iframe></div>
             <div id="GS_AdminRutas" class="tabcontent"><div class="window-header">🌍 Geosort: Admin Rutas</div><iframe src="https://geosort.falabella.com/app/modify"></iframe></div>
             <div id="GS_PlanifSectores" class="tabcontent"><div class="window-header">🌍 Geosort: Sectores</div><iframe src="https://geosort.falabella.com/app/planningv4"></iframe></div>
+
+            <div id="LCT_AgenteIA" class="tabcontent"><div class="window-header">🤖 Agente IA - LCT</div><iframe src="https://lct.falabella.supply/lct-dashboard/#/application/home-delivery/ayuda-en-ruta-web"></iframe></div>
+            <div id="LCT_Guias" class="tabcontent"><div class="window-header">📄 Guías de despacho</div><iframe src="https://lct.falabella.supply/lct-dashboard/#/application/home-delivery/dispatch-guide"></iframe></div>
+            <div id="LCT_Reclamos" class="tabcontent"><div class="window-header">⚖️ LCT - Reclamos</div><iframe src="https://logistics.falabella.services/lct/lct-login.html"></iframe></div>
+            <div id="Soporte_Contactos" class="tabcontent"><div class="window-header">📞 Contactos</div><iframe src="https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF"></iframe></div>
+            <div id="Soporte_Consolidado" class="tabcontent"><div class="window-header">📋 Consolidado Soporte</div><iframe src="https://docs.google.com/spreadsheets/d/12fHing4FhzXps3OygKZ3pRv4qJ2WYgRTpxtPkKQJ6tM/edit?rm=minimal&gid=0"></iframe></div>
 
             <div id="Notas_Mensajes" class="tabcontent">
                 <div class="window-header">💬 Plantillas Rápidas</div>
@@ -162,6 +127,21 @@ Recordar que el folio debe ser rebajado como cliente rechaza y el comentario deb
             <img src="cat.png" class="pet-img cat-img" alt="Gatito Incidencias" draggable="false">
             <img src="panda.png" class="pet-img panda-img" alt="Panda Tottus" draggable="false">
             <img src="fox.png" class="pet-img fox-img" alt="Zorro SimpliRoute" draggable="false">
+        </div>
+    </div>
+
+    <div id="modal-perfil" class="modal-overlay oculto">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>⚙️ Personalizar Herramientas</h2>
+                <p style="font-size:12px; color:#64748b; margin-top:5px;">Activa o desactiva las pestañas para el perfil: <strong id="modal-profile-name" style="color:#0f172a;"></strong></p>
+            </div>
+            <div class="modal-body" id="modal-tools-list">
+                </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-cancel" onclick="cerrarModalPerfil()">Cancelar</button>
+                <button class="modal-btn btn-save" onclick="guardarPersonalizacion()">Guardar Cambios</button>
+            </div>
         </div>
     </div>
 

@@ -8,8 +8,14 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
     box-shadow: 4px 0 15px rgba(0,0,0,0.05); overflow-y: auto; overflow-x: hidden;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; z-index: 10;
 }
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
 .sidebar.collapsed { width: 80px; }
 .sidebar.collapsed .text, .sidebar.collapsed .logo-info { display: none; }
+.sidebar.collapsed .profile-section { display: none; }
+.sidebar.collapsed .menu-section-header { display: none; }
+.sidebar.collapsed .menu-section-content.collapsed { display: flex; }
 
 .logo-container { padding: 24px 20px; background-color: #0b1120; border-bottom: 2px solid #334155; display: flex; justify-content: space-between; align-items: center; height: 90px; }
 .logo-info h2 { font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px; }
@@ -19,9 +25,28 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 #toggle-btn:hover { background-color: #1e293b; color: #ffffff; }
 .sidebar.collapsed #toggle-btn { margin: 0 auto; }
 
-.menu-section { padding: 20px 20px 10px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 600; }
-.sidebar button.tablinks { background-color: transparent; color: #94a3b8; padding: 12px 20px; border: none; outline: none; text-align: left; cursor: pointer; font-size: 13.5px; font-weight: 500; display: flex; align-items: center; transition: all 0.2s ease; border-left: 3px solid transparent; }
-.sidebar button.tablinks .icon { font-size: 20px; margin-right: 16px; color: #64748b; transition: color 0.2s; }
+/* SECCIÓN DE PERFILES */
+.profile-section { padding: 15px 20px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #1e293b; }
+#team-profile-selector { width: 100%; background: #1e293b; color: white; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
+.profile-buttons { display: flex; justify-content: space-between; gap: 5px; }
+.btn-edit-profile { background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 6px; padding: 6px; cursor: pointer; flex-grow: 1; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.btn-edit-profile:hover { color: #ffffff; background: #334155; border-color: #475569; }
+.btn-edit-profile:hover .material-symbols-outlined { color: #B2D234; }
+
+/* ACORDEONES Y SECCIONES DINÁMICAS */
+.menu-section-wrapper { margin-bottom: 5px; }
+.menu-section-header { padding: 15px 20px 5px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #64748b; user-select: none; }
+.menu-section-header:hover { color: #cbd5e1; }
+.menu-section-header .text { font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; }
+.menu-section-header .caret { font-size: 18px; transition: transform 0.3s; }
+.menu-section-header.collapsed .caret { transform: rotate(180deg); }
+
+.menu-section-content { display: flex; flex-direction: column; overflow: hidden; min-height: 10px; }
+.menu-section-content.collapsed { display: none; }
+
+/* BOTONES DEL MENÚ Y DRAG & DROP */
+.sidebar button.tablinks { background-color: transparent; color: #94a3b8; padding: 12px 20px; border: none; outline: none; text-align: left; cursor: grab; font-size: 13.5px; font-weight: 500; display: flex; align-items: center; transition: background-color 0.2s, color 0.2s; border-left: 3px solid transparent; }
+.sidebar button.tablinks .icon { font-size: 20px; margin-right: 16px; color: #64748b; transition: color 0.2s; pointer-events: none; }
 .sidebar.collapsed button.tablinks { padding: 16px 0; justify-content: center; }
 .sidebar.collapsed button.tablinks .icon { margin-right: 0; font-size: 24px; }
 
@@ -29,6 +54,10 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 .sidebar button.tablinks:hover .icon { color: #cbd5e1; }
 .sidebar button.tablinks.active { background-color: #1e293b; color: #ffffff; font-weight: 600; border-left: 3px solid #B2D234; }
 .sidebar button.tablinks.active .icon { color: #B2D234; }
+
+/* DRAGGING EFFECTS */
+.sidebar button.tablinks:active { cursor: grabbing; }
+.sidebar button.tablinks.dragging { opacity: 0.4; background-color: #0b1120; border: 1px dashed #B2D234; }
 
 /* --- ÁREA DE TRABAJO Y BARRA DE CONTROL --- */
 .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; background-color: #f8fafc; }
@@ -63,20 +92,6 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 .split-mode .window-header { display: block; border-radius: 4px 4px 0 0; }
 .tabcontent iframe { flex-grow: 1; width: 100%; height: 100%; border: none; }
 
-/* --- ESTILOS DE LANZADORES DE APLICACIONES SEGURAS --- */
-.launcher-container {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    height: 100%; min-height: 300px; padding: 40px; text-align: center; background: #f8fafc;
-}
-.launcher-icon { font-size: 64px; color: #94a3b8; margin-bottom: 20px; }
-.launcher-container h3 { font-size: 20px; color: #0f172a; margin-bottom: 10px; }
-.launcher-container p { font-size: 14px; color: #64748b; margin-bottom: 25px; max-width: 400px; line-height: 1.5; }
-.btn-launcher {
-    display: inline-flex; align-items: center; gap: 8px; background-color: #0f172a; color: #ffffff;
-    padding: 12px 24px; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 8px;
-    transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.btn-launcher:hover { background-color: #B2D234; color: #0f172a; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(178, 210, 52, 0.2); }
 
 /* --- PANEL DE MENSAJES --- */
 .panel-header { padding: 40px 50px 10px 50px; background-color: #ffffff; }
@@ -96,29 +111,14 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 #pet-container { 
     position: fixed; bottom: 20px; right: 30px; width: 120px; z-index: 1000; 
     cursor: grab; user-select: none; touch-action: none;
-    /* Sombras para dar profundidad operativa al Hub */
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
     transition: filter 0.2s;
 }
 #pet-container:active { cursor: grabbing; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));}
 
-/* Área Visual */
-.pet-visual-area {
-    position: relative; width: 100px; height: 100px; margin: 0 auto;
-    pointer-events: none; /* Dejamos que los clics pasen al container para arrastrar */
-}
+.pet-visual-area { position: relative; width: 100px; height: 100px; margin: 0 auto; pointer-events: none; }
+.pet-img { position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: contain; opacity: 0; scale: 0.8; transition: opacity 0.3s ease, scale 0.3s ease; pointer-events: none; }
 
-/* Configuración base de las imágenes .png */
-.pet-img {
-    position: absolute; width: 100%; height: 100%;
-    top: 0; left: 0;
-    object-fit: contain; /* Asegura que la forma .png se vea perfecta sin deformarse */
-    opacity: 0; scale: 0.8; /* Empezamos invisibles y pequeñas para la animación */
-    transition: opacity 0.3s ease, scale 0.3s ease; /* Transición suave al cambiar */
-    pointer-events: none;
-}
-
-/* Burbuja de Texto Operativa */
 #pet-speech { 
     position: absolute; bottom: 110px; right: -20px; width: 240px; 
     background-color: white; border: 2px solid #B2D234; border-radius: 12px; 
@@ -127,18 +127,40 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
     opacity: 1; transition: opacity 0.3s; pointer-events: none; 
     line-height: 1.4; z-index: 10;
 }
-#pet-speech::after { 
-    content: ''; position: absolute; bottom: -12px; right: 60px; 
-    border-width: 12px 12px 0; border-style: solid; 
-    border-color: #B2D234 transparent transparent transparent; 
-}
+#pet-speech::after { content: ''; position: absolute; bottom: -12px; right: 60px; border-width: 12px 12px 0; border-style: solid; border-color: #B2D234 transparent transparent transparent; }
 .oculto { opacity: 0 !important; }
 
-/* --- LÓGICA DE VISIBILIDAD DE TEMAS (CSS MUESTRA LA IMAGEN CORRECTA) 🐶🐱🐼🦊🦁 --- */
-
-/* Si el container tiene la clase del tema, mostramos SU imagen .png */
 .theme-corgi .corgi-img { opacity: 1; scale: 1; pointer-events: auto;}
 .theme-lion .lion-img { opacity: 1; scale: 1; pointer-events: auto;}
 .theme-cat .cat-img { opacity: 1; scale: 1; pointer-events: auto;}
 .theme-panda .panda-img { opacity: 1; scale: 1; pointer-events: auto;}
 .theme-fox .fox-img { opacity: 1; scale: 1; pointer-events: auto;}
+
+/* --- MODAL PERSONALIZACION PERFIL --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.7); z-index: 3000;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 1; transition: opacity 0.2s;
+}
+.modal-overlay.oculto { opacity: 0; pointer-events: none; }
+.modal-box {
+    background: #ffffff; width: 450px; max-height: 85vh; border-radius: 12px;
+    display: flex; flex-direction: column; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    transform: translateY(0); transition: transform 0.3s;
+}
+.modal-overlay.oculto .modal-box { transform: translateY(20px); }
+.modal-header { padding: 20px 25px; border-bottom: 1px solid #e2e8f0; }
+.modal-header h2 { font-size: 18px; color: #0f172a; }
+.modal-body { padding: 20px 25px; overflow-y: auto; flex-grow: 1; }
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.modal-footer { padding: 15px 25px; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px; }
+.modal-section-title { font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase; margin: 15px 0 10px; padding-bottom: 5px; border-bottom: 1px solid #e2e8f0; letter-spacing: 1px;}
+.modal-checkbox-group { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; color: #334155; font-weight: 500; cursor: pointer; }
+.modal-checkbox-group input { margin-right: 12px; width: 16px; height: 16px; accent-color: #B2D234; cursor: pointer; }
+.modal-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; font-size: 13px; }
+.btn-cancel { background: #f1f5f9; color: #334155; }
+.btn-cancel:hover { background: #e2e8f0; }
+.btn-save { background: #0f172a; color: white; }
+.btn-save:hover { background: #B2D234; color: #0f172a; }
