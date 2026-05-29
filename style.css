@@ -37,6 +37,7 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
     display: flex; gap: 15px; padding: 12px 24px; background: #ffffff;
     border-bottom: 1px solid #e2e8f0; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
+.pet-selector-container { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .btn-control {
     display: flex; align-items: center; gap: 8px; padding: 8px 16px; border: none; border-radius: 6px;
     font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #e2e8f0; color: #334155;
@@ -52,25 +53,30 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 .tabcontent { display: none; width: 100%; height: 100%; flex-direction: column; background: #fff; }
 .tabcontent.active-tab { display: flex; }
 
-/* Estilos Específicos cuando el Modo Multipantalla está encendido */
 .split-mode .tabcontent.active-tab {
-    width: calc(50% - 20px);
-    height: 50vh;
-    min-width: 320px;
-    min-height: 250px;
-    margin: 10px;
-    resize: both;
-    overflow: auto;
-    border: 2px solid #334155;
-    border-radius: 8px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    padding-bottom: 2px;
+    width: calc(50% - 20px); height: 50vh; min-width: 320px; min-height: 250px;
+    margin: 10px; resize: both; overflow: auto; border: 2px solid #334155;
+    border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); padding-bottom: 2px;
 }
 
 .window-header { display: none; background: #0f172a; color: white; padding: 8px 12px; font-size: 13px; font-weight: 600; user-select: none; letter-spacing: 0.5px; }
 .split-mode .window-header { display: block; border-radius: 4px 4px 0 0; }
-
 .tabcontent iframe { flex-grow: 1; width: 100%; height: 100%; border: none; }
+
+/* --- ESTILOS DE LANZADORES DE APLICACIONES SEGURAS --- */
+.launcher-container {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; min-height: 300px; padding: 40px; text-align: center; background: #f8fafc;
+}
+.launcher-icon { font-size: 64px; color: #94a3b8; margin-bottom: 20px; }
+.launcher-container h3 { font-size: 20px; color: #0f172a; margin-bottom: 10px; }
+.launcher-container p { font-size: 14px; color: #64748b; margin-bottom: 25px; max-width: 400px; line-height: 1.5; }
+.btn-launcher {
+    display: inline-flex; align-items: center; gap: 8px; background-color: #0f172a; color: #ffffff;
+    padding: 12px 24px; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 8px;
+    transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn-launcher:hover { background-color: #B2D234; color: #0f172a; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(178, 210, 52, 0.2); }
 
 /* --- PANEL DE MENSAJES --- */
 .panel-header { padding: 40px 50px 10px 50px; background-color: #ffffff; }
@@ -86,20 +92,53 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 .card.copied { border-color: #B2D234; background-color: #fcfdf5; }
 .card.copied .btn-copy { background-color: #0f172a; color: #ffffff; }
 
-/* --- ESTILOS DEL CORGI --- */
-#corgi-container { position: fixed; bottom: 20px; right: 30px; width: 120px; z-index: 1000; cursor: pointer; }
-.corgi-head { position: relative; width: 100px; height: 90px; margin: 0 auto; }
-.face { position: absolute; width: 100px; height: 80px; background-color: #E69D45; border-radius: 50% 50% 40% 40%; bottom: 0; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-.face::after { content: ''; position: absolute; bottom: -10px; left: 20px; width: 60px; height: 60px; background-color: white; border-radius: 50%; }
-.ear { position: absolute; width: 40px; height: 60px; background-color: #E69D45; border-radius: 50% 50% 0 0; top: -10px; z-index: -1; }
-.left-ear { left: 0; transform: rotate(-20deg); }
-.right-ear { right: 0; transform: rotate(20deg); }
-.eye { position: absolute; width: 18px; height: 18px; background-color: white; border-radius: 50%; top: 30px; display: flex; justify-content: center; align-items: center; z-index: 2; }
-.eye:nth-child(1) { left: 22px; }
-.eye:nth-child(2) { right: 22px; }
-.pupil { width: 10px; height: 10px; background-color: #0f172a; border-radius: 50%; position: absolute; transition: transform 0.1s ease-out; }
-.snout { position: absolute; bottom: 15px; left: 40px; width: 20px; height: 12px; z-index: 2; }
-.nose { width: 20px; height: 12px; background-color: #0f172a; border-radius: 50% 50% 40% 40%; }
-#corgi-speech { position: absolute; bottom: 110px; right: -20px; width: 240px; background-color: white; border: 2px solid #B2D234; border-radius: 12px; padding: 16px; font-size: 13.5px; color: #0f172a; font-weight: 600; text-align: center; box-shadow: 0 8px 16px rgba(0,0,0,0.1); opacity: 1; transition: opacity 0.3s; pointer-events: none; line-height: 1.4; }
-#corgi-speech::after { content: ''; position: absolute; bottom: -12px; right: 60px; border-width: 12px 12px 0; border-style: solid; border-color: #B2D234 transparent transparent transparent; }
+/* --- COMPAÑERO VIRTUAL PRO (MODELO DE IMÁGENES .PNG) 🐾 --- */
+#pet-container { 
+    position: fixed; bottom: 20px; right: 30px; width: 120px; z-index: 1000; 
+    cursor: grab; user-select: none; touch-action: none;
+    /* Sombras para dar profundidad operativa al Hub */
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    transition: filter 0.2s;
+}
+#pet-container:active { cursor: grabbing; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));}
+
+/* Área Visual */
+.pet-visual-area {
+    position: relative; width: 100px; height: 100px; margin: 0 auto;
+    pointer-events: none; /* Dejamos que los clics pasen al container para arrastrar */
+}
+
+/* Configuración base de las imágenes .png */
+.pet-img {
+    position: absolute; width: 100%; height: 100%;
+    top: 0; left: 0;
+    object-fit: contain; /* Asegura que la forma .png se vea perfecta sin deformarse */
+    opacity: 0; scale: 0.8; /* Empezamos invisibles y pequeñas para la animación */
+    transition: opacity 0.3s ease, scale 0.3s ease; /* Transición suave al cambiar */
+    pointer-events: none;
+}
+
+/* Burbuja de Texto Operativa */
+#pet-speech { 
+    position: absolute; bottom: 110px; right: -20px; width: 240px; 
+    background-color: white; border: 2px solid #B2D234; border-radius: 12px; 
+    padding: 16px; font-size: 13.5px; color: #0f172a; font-weight: 600; 
+    text-align: center; box-shadow: 0 8px 16px rgba(0,0,0,0.1); 
+    opacity: 1; transition: opacity 0.3s; pointer-events: none; 
+    line-height: 1.4; z-index: 10;
+}
+#pet-speech::after { 
+    content: ''; position: absolute; bottom: -12px; right: 60px; 
+    border-width: 12px 12px 0; border-style: solid; 
+    border-color: #B2D234 transparent transparent transparent; 
+}
 .oculto { opacity: 0 !important; }
+
+/* --- LÓGICA DE VISIBILIDAD DE TEMAS (CSS MUESTRA LA IMAGEN CORRECTA) 🐶🐱🐼🦊🦁 --- */
+
+/* Si el container tiene la clase del tema, mostramos SU imagen .png */
+.theme-corgi .corgi-img { opacity: 1; scale: 1; pointer-events: auto;}
+.theme-lion .lion-img { opacity: 1; scale: 1; pointer-events: auto;}
+.theme-cat .cat-img { opacity: 1; scale: 1; pointer-events: auto;}
+.theme-panda .panda-img { opacity: 1; scale: 1; pointer-events: auto;}
+.theme-fox .fox-img { opacity: 1; scale: 1; pointer-events: auto;}

@@ -59,6 +59,16 @@
             <button class="btn-control btn-reset" onclick="resetViews()">
                 <span class="material-symbols-outlined">restart_alt</span> Restaurar Vista
             </button>
+            
+            <div class="pet-selector-container">
+                <span class="material-symbols-outlined" style="color:#64748b; font-size: 18px;">pets</span>
+                <select id="pet-selector" class="btn-control" onchange="cambiarMascota()">
+                    <option value="corgi">Corgi</option>
+                    <option value="lion">León</option> <option value="cat">Gatito</option>
+                    <option value="panda">Panda</option>
+                    <option value="fox">Zorro</option>
+                </select>
+            </div>
         </div>
 
         <div id="views-container" class="views-container">
@@ -67,16 +77,43 @@
             <div id="SP_CasosVIP" class="tabcontent"><div class="window-header">⭐ Casos VIP</div><iframe src="https://docs.google.com/spreadsheets/d/1WZFvfZiXTHaQVlzTArw0IWvWiU_IeRR2iSApdryRRGo/edit?rm=minimal&gid=0"></iframe></div>
             <div id="SP_NoPago" class="tabcontent"><div class="window-header">⚠️ SP No Pago (Incidencias)</div><iframe src="https://docs.google.com/spreadsheets/d/1mWVya7R5FF3IFDpHOwqxlL1OaxZGFYND9mbbHtPtXb8/edit?rm=minimal&gid=736947450"></iframe></div>
             <div id="SP_Tottus" class="tabcontent"><div class="window-header">🛒 Tottus - Farfana</div><iframe src="https://docs.google.com/spreadsheets/d/1dXqvCb4i6PPO9aJyipxPEMMESZ9rzUHSduUPVvNV-qM/edit?rm=minimal&gid=1182565167"></iframe></div>
-            <div id="SP_Ikea" class="tabcontent"><div class="window-header">🇸🇪 IKEA</div><iframe src="https://docs.google.com/spreadsheets/d/1Y1p99h1IIvCaTdOLKDXwCn5fs8Q5UfViwqWxh8ehgDQ/edit?rm=minimal&gid=515805043"></iframe></div>
+            <div id="SP_Ikea" class="tabcontent"><div class="window-header">🇸🇪 IKEA</div><iframe src="https://docs.google.com/spreadsheets/d/1Y1p99h1IIvCaTdOLKDXwCn5fs8Q5UfViwWxh8ehgDQ/edit?rm=minimal&gid=515805043"></iframe></div>
             <div id="SP_MantenedorIA" class="tabcontent"><div class="window-header">🤖 Mantenedor IA</div><iframe src="https://docs.google.com/spreadsheets/d/17ea0Fdmj9xFsVj1qp1dZLPXiLl6d_5Wg5Ye0M-PV6wg/edit?rm=minimal&gid=0"></iframe></div>
             <div id="SP_Comunicaciones" class="tabcontent"><div class="window-header">🔄 Comunicaciones</div><iframe src="https://docs.google.com/spreadsheets/d/1KACx_rsI4g63lMS_lt8EIcAp6l7cY8aaRa9TZw0YBnQ/edit?rm=minimal&gid=543420077"></iframe></div>
             <div id="SP_TiendasFlujo" class="tabcontent"><div class="window-header">📦 Tiendas Flujo PM</div><iframe src="https://docs.google.com/spreadsheets/d/1IcP9k2RsE5CqdUjDepTbrN7eQ8DOkE9ctiVqhkdIxBY/edit?rm=minimal&gid=0"></iframe></div>
 
             <div id="SR_Login" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Login</div><iframe src="https://app2.simpliroute.com/#/login"></iframe></div>
             <div id="SR_Principal" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Principal</div><iframe src="https://app2.simpliroute.com/#/planner/vehicles"></iframe></div>
-            <div id="SR_Flotas" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Flotas</div><iframe src="https://app3.simpliroute.com/settings/fleets"></iframe></div>
-            <div id="SR_Seguimiento" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Seguimiento</div><iframe src="https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959"></iframe></div>
-            <div id="SR_Extensiones" class="tabcontent"><div class="window-header">🚀 SimpliRoute: Extensiones</div><iframe src="https://app3.simpliroute.com/es/extensions"></iframe></div>
+            
+            <div id="SR_Flotas" class="tabcontent">
+                <div class="window-header">🚀 SimpliRoute: Flotas</div>
+                <div class="launcher-container">
+                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
+                    <h3>Apertura Externa Requerida</h3>
+                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
+                    <a href="https://app3.simpliroute.com/settings/fleets" target="_blank" class="btn-launcher">Abrir Flotas ↗️</a>
+                </div>
+            </div>
+
+            <div id="SR_Seguimiento" class="tabcontent">
+                <div class="window-header">🚀 SimpliRoute: Seguimiento</div>
+                <div class="launcher-container">
+                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
+                    <h3>Apertura Externa Requerida</h3>
+                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
+                    <a href="https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959" target="_blank" class="btn-launcher">Abrir Seguimiento ↗️</a>
+                </div>
+            </div>
+
+            <div id="SR_Extensiones" class="tabcontent">
+                <div class="window-header">🚀 SimpliRoute: Extensiones</div>
+                <div class="launcher-container">
+                    <span class="material-symbols-outlined launcher-icon">open_in_new</span>
+                    <h3>Apertura Externa Requerida</h3>
+                    <p>El servidor app3 de SimpliRoute necesita verificar tu sesión en una ventana completa para funcionar.</p>
+                    <a href="https://app3.simpliroute.com/es/extensions" target="_blank" class="btn-launcher">Abrir Extensiones ↗️</a>
+                </div>
+            </div>
 
             <div id="GS_Reporte" class="tabcontent"><div class="window-header">🌍 Geosort: Reporte</div><iframe src="https://geosort.falabella.com/app/reporter"></iframe></div>
             <div id="GS_Seguimiento" class="tabcontent"><div class="window-header">🌍 Geosort: Seguimiento</div><iframe src="https://geosort.falabella.com/app/tracingV1"></iframe></div>
@@ -116,15 +153,15 @@ Recordar que el folio debe ser rebajado como cliente rechaza y el comentario deb
         </div>
     </div>
 
-    <div id="corgi-container">
-        <div id="corgi-speech" class="oculto">¡Guau! Aquí estoy para ayudarte.</div>
-        <div class="corgi-head">
-            <div class="ear left-ear"></div><div class="ear right-ear"></div>
-            <div class="face">
-                <div class="eye"><div class="pupil" id="pupil-left"></div></div>
-                <div class="eye"><div class="pupil" id="pupil-right"></div></div>
-                <div class="snout"><div class="nose"></div></div>
-            </div>
+    <div id="pet-container" class="theme-corgi">
+        <div id="pet-speech" class="oculto">¡Aquí estoy para ayudarte!</div>
+        
+        <div class="pet-visual-area">
+            <img src="corgi.png" class="pet-img corgi-img" alt="Corgi de Seguimiento" draggable="false">
+            <img src="lion.png" class="pet-img lion-img" alt="León Torre de Control" draggable="false">
+            <img src="cat.png" class="pet-img cat-img" alt="Gatito Incidencias" draggable="false">
+            <img src="panda.png" class="pet-img panda-img" alt="Panda Tottus" draggable="false">
+            <img src="fox.png" class="pet-img fox-img" alt="Zorro SimpliRoute" draggable="false">
         </div>
     </div>
 
