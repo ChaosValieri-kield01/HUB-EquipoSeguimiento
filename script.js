@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES (Sin Emojis)
+   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES (Sin Emojis en código)
    ========================================================================== */
 
 const DEFINICION_HERRAMIENTAS = {
@@ -31,8 +31,12 @@ const DEFINICION_HERRAMIENTAS = {
         { id: "LCT_Reclamos", icon: "gavel", text: "Reclamos (Flotante)", call: "abrirVentanaFlotante('https://logistics.falabella.services/lct/lct-login.html', 'LCTPopup')" }
     ],
     "Soporte y Contactos": [
-        { id: "Soporte_Contactos", icon: "contact_phone", text: "Contactos", call: "abrirPestana(event, 'Soporte_Contactos')" },
+        { id: "Soporte_Contactos", icon: "contact_phone", text: "Contactos (Flotante)", call: "abrirVentanaFlotante('https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" },
         { id: "Soporte_Consolidado", icon: "view_list", text: "Consolidado Soporte", call: "abrirPestana(event, 'Soporte_Consolidado')" }
+    ],
+    "📱 Mensajería y Correo": [
+        { id: "App_WhatsApp", icon: "forum", text: "WhatsApp Web", call: "abrirVentanaFlotante('https://web.whatsapp.com/', 'WAPopup')" },
+        { id: "App_Outlook", icon: "mail", text: "Correo Outlook", call: "abrirVentanaFlotante('https://outlook.office.com/mail/', 'OutlookPopup')" }
     ],
     "Plantillas Rápidas": [
         { id: "Notas_Mensajes", icon: "quickreply", text: "Plantillas de Mensajes", call: "abrirPestana(event, 'Notas_Mensajes')" }
@@ -49,6 +53,7 @@ const PERFILES_DEFAULT = {
             "Geosort": { collapsed: false, items: ["GS_Reporte", "GS_Seguimiento", "GS_AdminRutas", "GS_PlanifSectores"] },
             "Herramientas LCT": { collapsed: false, items: ["LCT_AgenteIA", "LCT_Guias", "LCT_Reclamos"] },
             "Soporte y Contactos": { collapsed: true, items: ["Soporte_Contactos", "Soporte_Consolidado"] },
+            "📱 Mensajería y Correo": { collapsed: false, items: ["App_WhatsApp", "App_Outlook"] },
             "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     },
@@ -59,6 +64,7 @@ const PERFILES_DEFAULT = {
             "Planillas Estratégicas": { collapsed: true, items: ["SP_CasosVIP", "SP_NoPago", "SP_MantenedorIA"] },
             "Soporte y Contactos": { collapsed: false, items: ["Soporte_Contactos", "Soporte_Consolidado"] },
             "Herramientas LCT": { collapsed: false, items: ["LCT_Reclamos", "LCT_AgenteIA"] },
+            "📱 Mensajería y Correo": { collapsed: false, items: ["App_WhatsApp", "App_Outlook"] },
             "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     },
@@ -69,13 +75,14 @@ const PERFILES_DEFAULT = {
             "Planillas Estratégicas": { collapsed: false, items: ["SP_Comunicaciones"] },
             "SimpliRoute": { collapsed: false, items: ["SR_Seguimiento"] },
             "Geosort": { collapsed: false, items: ["GS_Seguimiento"] },
+            "📱 Mensajería y Correo": { collapsed: false, items: ["App_WhatsApp", "App_Outlook"] },
             "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     }
 };
 
-// Modificamos la clave de Storage para forzar la actualización limpia sin emojis antiguos
-let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v4'));
+// Modificamos la clave de Storage para forzar la actualización limpia (V5)
+let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v5'));
 if (!perfilesGuardados || Object.keys(perfilesGuardados).length === 0) {
     perfilesGuardados = JSON.parse(JSON.stringify(PERFILES_DEFAULT));
 }
@@ -86,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function guardarEnStorage() {
-    localStorage.setItem('perfiles_hub_lof1_v4', JSON.stringify(perfilesGuardados));
+    localStorage.setItem('perfiles_hub_lof1_v5', JSON.stringify(perfilesGuardados));
 }
 
 /* ==========================================================================
@@ -371,7 +378,6 @@ function toggleSplitMode() {
         btnSplit.innerHTML = '<span class="material-symbols-outlined">splitscreen</span> Modo Multipantalla: ON';
         btnSplit.classList.add('active');
 
-        // Acomodar las ventanas activas en cascada simulando un Escritorio
         let offset = 20;
         document.querySelectorAll('.tabcontent.active-tab').forEach(tab => {
             activeZIndex++;
@@ -388,7 +394,6 @@ function toggleSplitMode() {
         btnSplit.innerHTML = '<span class="material-symbols-outlined">splitscreen</span> Modo Multipantalla: OFF';
         btnSplit.classList.remove('active');
         
-        // Restaurar estilos al quitar multipantalla
         document.querySelectorAll('.tabcontent').forEach(tab => {
             tab.style.left = ''; tab.style.top = '';
             tab.style.width = '100%'; tab.style.height = '100%';
@@ -414,7 +419,6 @@ function abrirPestana(evt, nombrePestana) {
         if (btn) btn.classList.toggle("active");
 
         if (!wasActive) {
-            // Posicionar nueva ventana en el centro del escritorio virtual
             activeZIndex++;
             target.style.zIndex = activeZIndex;
             target.style.left = '50px';
@@ -454,7 +458,6 @@ let startXW, startYW, initialLeftW, initialTopW;
 document.querySelectorAll('.tabcontent').forEach(tab => {
     const header = tab.querySelector('.window-header');
     
-    // Al hacer clic, la ventana pasa al frente
     tab.addEventListener('mousedown', () => {
         if(isSplitMode) {
             activeZIndex++;
@@ -515,7 +518,13 @@ function copiarMensaje(cardElement, index) {
 let ventanasFlotantes = {};
 
 function abrirVentanaFlotante(url, winName) {
-    const width = 1100; const height = 750;
+    // Si la URL es de WhatsApp, queremos que sea un poco más angosta tipo chat
+    let width = 1100; 
+    let height = 750;
+    
+    if (url.includes("whatsapp")) { width = 800; height = 800; }
+    if (url.includes("outlook")) { width = 1000; height = 800; }
+
     const left = (screen.width - width) / 2; const top = (screen.height - height) / 2;
     ventanasFlotantes[winName] = window.open(
         url, winName, 
