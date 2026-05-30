@@ -84,7 +84,7 @@ const PERFILES_DEFAULT = {
     }
 };
 
-let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v9'));
+let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v10'));
 if (!perfilesGuardados || Object.keys(perfilesGuardados).length === 0) {
     perfilesGuardados = JSON.parse(JSON.stringify(PERFILES_DEFAULT));
 }
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function guardarEnStorage() {
-    localStorage.setItem('perfiles_hub_lof1_v9', JSON.stringify(perfilesGuardados));
+    localStorage.setItem('perfiles_hub_lof1_v10', JSON.stringify(perfilesGuardados));
 }
 
 /* ==========================================================================
@@ -399,14 +399,14 @@ function copiarMensaje(cardElement, index) {
 
 
 /* ==========================================================================
-   CONTROL DE VENTANAS FLOTANTES (APERTURA INTELIGENTE CON MEMORIA)
+   CONTROL DE VENTANAS FLOTANTES (INVOCACIÓN INTELIGENTE)
    ========================================================================== */
-// Usar variable global protegida para evitar borrado total si es posible
+// Usamos memoria global para evitar recargas
 let ventanasFlotantes = window.ventanasFlotantes || {};
 
 function mostrarAvisoFoco(winName) {
     let aviso = document.createElement('div');
-    aviso.innerHTML = `La ventana ya está abierta. <br><span style="font-size: 11px; color: #94a3b8;">Si no la ves, revisa tu barra de tareas abajo.</span>`;
+    aviso.innerHTML = `Ventana de operación encontrada. <br><span style="font-size: 11px; color: #94a3b8;">Revisa tu barra de tareas si no la ves.</span>`;
     aviso.style.position = 'fixed'; aviso.style.bottom = '20px'; aviso.style.left = '50%';
     aviso.style.transform = 'translateX(-50%)'; aviso.style.background = '#0f172a';
     aviso.style.color = '#B2D234'; aviso.style.padding = '12px 24px';
@@ -418,20 +418,16 @@ function mostrarAvisoFoco(winName) {
 }
 
 function abrirVentanaFlotante(e, url, winName) {
-    if (e && e.preventDefault) e.preventDefault(); // Evita recargas de la página accidentalmente
+    if (e && e.preventDefault) e.preventDefault(); 
 
     try {
-        // MAGIA: Si la ventana ya existe en nuestra memoria y NO está cerrada...
         if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
-            ventanasFlotantes[winName].focus(); // La traemos al frente
-            mostrarAvisoFoco(winName); // Avisamos al usuario por si Windows la bloquea en la barra de tareas
-            return; // ¡DETENEMOS LA FUNCIÓN AQUÍ PARA QUE NO RECARGUE LA URL!
+            ventanasFlotantes[winName].focus(); 
+            mostrarAvisoFoco(winName); 
+            return; 
         }
-    } catch(err) {
-        console.log("Revisando estado de ventana...");
-    }
+    } catch(err) { console.log("Estado de ventana..."); }
 
-    // Si llegamos hasta aquí, es porque la ventana no existía o el usuario recargó la página con F5
     let width = 1100; let height = 750;
     if (url.includes("whatsapp")) { width = 850; height = 800; }
     if (url.includes("outlook")) { width = 1000; height = 800; }
@@ -447,13 +443,14 @@ function abrirVentanaFlotante(e, url, winName) {
     }
 }
 
+// Los botones superiores SOLO llaman al frente
 function traerVentanaAlFrente(e, winName) {
     if(e && e.preventDefault) e.preventDefault();
     if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
         ventanasFlotantes[winName].focus();
         mostrarAvisoFoco(winName);
     } else {
-        alert("¡Primero debes abrir esta herramienta desde tu menú izquierdo o barra superior para poder traerla al frente!");
+        alert("¡Aún no has abierto esta herramienta! Iníciala desde el menú lateral izquierdo para poder usar este acceso directo.");
     }
 }
 

@@ -46,23 +46,30 @@
             </button>
             
             <div class="action-buttons-group">
-                <button class="btn-control btn-whatsapp" onclick="abrirVentanaFlotante(event, 'https://web.whatsapp.com/', 'WAPopup')" title="Abrir WhatsApp">
+                <button class="btn-control btn-whatsapp" onclick="traerVentanaAlFrente(event, 'WAPopup')" title="Traer WhatsApp al frente">
                     <span class="material-symbols-outlined">forum</span> WA
                 </button>
-                <button class="btn-control btn-outlook" onclick="abrirVentanaFlotante(event, 'https://outlook.office.com/mail/', 'OutlookPopup')" title="Abrir Outlook">
+                <button class="btn-control btn-outlook" onclick="traerVentanaAlFrente(event, 'OutlookPopup')" title="Traer Outlook al frente">
                     <span class="material-symbols-outlined">mail</span> Correo
                 </button>
-                <button class="btn-control btn-contactos" onclick="abrirVentanaFlotante(event, 'https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" title="Contactos Flotante">
+                <button class="btn-control btn-contactos" onclick="traerVentanaAlFrente(event, 'LookerPopup')" title="Traer Contactos al frente">
                     <span class="material-symbols-outlined">contact_phone</span> Contactos
                 </button>
                 
                 <div class="separator"></div>
 
-                <button class="btn-control btn-simpli" onclick="traerVentanaAlFrente(event, 'SimpliRoutePopup')" title="Llamar ventana de SimpliRoute">
+                <button class="btn-control btn-simpli" onclick="traerVentanaAlFrente(event, 'SimpliRoutePopup')" title="Traer SimpliRoute al frente">
                     <span class="material-symbols-outlined">flip_to_front</span> SimpliRoute
                 </button>
-                <button class="btn-control btn-lct" onclick="traerVentanaAlFrente(event, 'LCTPopup')" title="Llamar ventana de LCT">
-                    <span class="material-symbols-outlined">flip_to_front</span> LCT - Reclamos OC
+                <button class="btn-control btn-lct" onclick="traerVentanaAlFrente(event, 'LCTPopup')" title="Traer LCT al frente">
+                    <span class="material-symbols-outlined">flip_to_front</span> LCT
+                </button>
+                
+                <button class="btn-control btn-genesys" onclick="traerVentanaAlFrente(event, 'GenesysPopup')" title="Traer Genesys al frente">
+                    <span class="material-symbols-outlined">headset_mic</span> Genesys
+                </button>
+                <button class="btn-control btn-workfast" onclick="traerVentanaAlFrente(event, 'WorkfastPopup')" title="Traer Workfast al frente">
+                    <span class="material-symbols-outlined">work</span> Workfast
                 </button>
             </div>
             
