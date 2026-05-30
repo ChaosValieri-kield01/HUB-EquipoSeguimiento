@@ -33,13 +33,17 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 .btn-edit-profile:hover { color: #ffffff; background: #334155; border-color: #475569; }
 .btn-edit-profile:hover .material-symbols-outlined { color: #B2D234; }
 
-/* ACORDEONES Y SECCIONES DINÁMICAS */
+/* ACORDEONES Y SECCIONES DINÁMICAS (CON COLORES PERSONALIZADOS) */
 .menu-section-wrapper { margin-bottom: 5px; }
 .menu-section-header { padding: 15px 20px 5px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #64748b; user-select: none; }
 .menu-section-header:hover { color: #cbd5e1; }
-.menu-section-header .text { font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; }
+.menu-section-header .text { font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; transition: color 0.3s;}
 .menu-section-header .caret { font-size: 18px; transition: transform 0.3s; }
 .menu-section-header.collapsed .caret { transform: rotate(180deg); }
+
+/* Colores para Geosort y SimpliRoute */
+.menu-section-wrapper[data-section="Geosort"] .menu-section-header .text { color: #B2D234; }
+.menu-section-wrapper[data-section="SimpliRoute"] .menu-section-header .text { color: #38bdf8; }
 
 .menu-section-content { display: flex; flex-direction: column; overflow: hidden; min-height: 10px; }
 .menu-section-content.collapsed { display: none; }
@@ -61,26 +65,36 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
 /* --- ÁREA DE TRABAJO Y BARRA DE CONTROL --- */
 .main-content { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; background-color: #f8fafc; }
 
-.top-controls {
-    display: flex; gap: 10px; padding: 12px 24px; background: #ffffff;
-    border-bottom: 1px solid #e2e8f0; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-.action-buttons-group { display: flex; gap: 10px; border-left: 1px solid #e2e8f0; padding-left: 10px; margin-left: 5px; }
+.top-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 24px; background: #ffffff; border-bottom: 1px solid #e2e8f0; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.action-buttons-group { display: flex; align-items: center; gap: 10px; border-left: 1px solid #e2e8f0; padding-left: 10px; margin-left: 5px; }
+.separator { width: 1px; height: 20px; background-color: #e2e8f0; margin: 0 5px; }
 
-.pet-selector-container { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.btn-control {
-    display: flex; align-items: center; gap: 8px; padding: 8px 16px; border: none; border-radius: 6px;
-    font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #e2e8f0; color: #334155;
-}
+.btn-control { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #e2e8f0; color: #334155; }
 .btn-control:hover { background: #cbd5e1; }
 .btn-control.active { background: #B2D234; color: #0f172a; box-shadow: 0 4px 6px rgba(178, 210, 52, 0.3); }
 .btn-reset:hover { background: #ef4444; color: white; }
 
-.btn-simpli { background-color: #F0A83D; color: white; border: none; }
-.btn-simpli:hover { background-color: #d99330 !important; color: white !important;}
-.btn-lct { background-color: #0284c7; color: white; border: none; }
-.btn-lct:hover { background-color: #0369a1 !important; color: white !important;}
-.pet-btn { background-color: #f8fafc; border: 1px solid #e2e8f0; }
+/* Colores de Botones Superiores */
+.btn-whatsapp { background-color: #25D366; color: white; }
+.btn-whatsapp:hover { background-color: #20bd5a; color: white; }
+.btn-outlook { background-color: #0078D4; color: white; }
+.btn-outlook:hover { background-color: #006abc; color: white; }
+.btn-contactos { background-color: #8b5cf6; color: white; }
+.btn-contactos:hover { background-color: #7c3aed; color: white; }
+.btn-simpli { background-color: #38bdf8; color: white; }
+.btn-simpli:hover { background-color: #0ea5e9; color: white; }
+.btn-lct { background-color: #0284c7; color: white; }
+.btn-lct:hover { background-color: #0369a1; color: white; }
+.btn-genesys { background-color: #f97316; color: white; }
+.btn-genesys:hover { background-color: #ea580c; color: white; }
+.btn-workfast { background-color: #6366f1; color: white; }
+.btn-workfast:hover { background-color: #4f46e5; color: white; }
+
+.btn-tutorial-trigger { background-color: #0f172a; color: #B2D234; border: none; }
+.btn-tutorial-trigger:hover { background-color: #1e293b; color: #B2D234; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+.pet-selector-container { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.pet-btn { background-color: #f8fafc; border: 1px solid #e2e8f0; text-align: center; text-align-last: center; min-width: 100px; }
 
 /* --- SISTEMA DE PESTAÑAS --- */
 .views-container { flex-grow: 1; display: flex; flex-direction: row; height: 100%; overflow: hidden; padding: 0; position: relative; }
@@ -97,13 +111,11 @@ body { display: flex; height: 100vh; background-color: #f1f5f9; overflow: hidden
     border: 1px solid #64748b; border-radius: 8px; 
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); 
     overflow: hidden; 
-    resize: both; /* Habilita expansión desde la esquina inferior derecha */
+    resize: both; 
     min-width: 320px; min-height: 250px;
 }
 .split-mode .window-header { display: flex; cursor: grab; }
 .split-mode .window-header:active { cursor: grabbing; }
-
-/* Evita que el iframe bloquee el mouse al arrastrar o redimensionar */
 body.dragging-window iframe { pointer-events: none; }
 
 /* --- PANEL DE MENSAJES --- */
@@ -149,7 +161,7 @@ body.dragging-window iframe { pointer-events: none; }
 .theme-panda .panda-img { opacity: 1; scale: 1; pointer-events: auto;}
 .theme-fox .fox-img { opacity: 1; scale: 1; pointer-events: auto;}
 
-/* --- MODAL PERSONALIZACION PERFIL --- */
+/* --- MODALES Y TUTORIAL --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.7); z-index: 3000;
@@ -177,3 +189,29 @@ body.dragging-window iframe { pointer-events: none; }
 .btn-cancel:hover { background: #e2e8f0; }
 .btn-save { background: #0f172a; color: white; }
 .btn-save:hover { background: #B2D234; color: #0f172a; }
+
+/* Diseño específico del Tutorial Toast */
+.tutorial-toast { position: fixed; bottom: 30px; right: 30px; background: white; border-left: 5px solid #B2D234; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 15px; transform: translateX(0); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s; width: 320px; }
+.tutorial-toast.oculto { transform: translateX(150%); opacity: 0; pointer-events: none; }
+.toast-content { display: flex; align-items: center; gap: 15px; }
+.icon-pulse { color: #B2D234; font-size: 32px; animation: pulse 2s infinite; }
+.toast-text h4 { margin:0; font-size: 15px; color: #0f172a; }
+.toast-text p { margin: 5px 0 0 0; font-size: 13px; color: #64748b; line-height: 1.4; }
+.toast-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.btn-toast-no { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; font-weight: 600; transition: color 0.2s; }
+.btn-toast-no:hover { color: #0f172a; }
+.btn-toast-si { background: #B2D234; border: none; color: #0f172a; padding: 8px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
+.btn-toast-si:hover { transform: translateY(-2px); }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+/* Diseño específico Modal Tutorial */
+.tutorial-box { width: 500px; text-align: center; }
+.tutorial-image { width: 100%; height: 180px; background: #f8fafc; border-radius: 8px; margin-bottom: 20px; display:flex; justify-content:center; align-items:center; }
+.tutorial-image .material-symbols-outlined { font-size: 80px; color: #94a3b8; }
+.tutorial-image.green .material-symbols-outlined { color: #B2D234; }
+.tutorial-title { font-size: 22px; color: #0f172a; margin-bottom: 12px; font-weight: 700; }
+.tutorial-desc { font-size: 14.5px; color: #475569; line-height: 1.6; padding: 0 10px; }
+.tutorial-footer { display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; }
+.tutorial-dots { display: flex; gap: 6px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; transition: 0.3s; }
+.dot.active { background: #B2D234; width: 24px; border-radius: 4px; }
