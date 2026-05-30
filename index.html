@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz Torre de Control 🖥️</title>
+    <title>Interfaz Equipo Seguimiento</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -46,29 +46,23 @@
             </button>
             
             <div class="action-buttons-group">
-                <button class="btn-control btn-whatsapp" onclick="abrirVentanaFlotante('https://web.whatsapp.com/', 'WAPopup')" title="Abrir WhatsApp">
+                <button class="btn-control btn-whatsapp" onclick="abrirVentanaFlotante(event, 'https://web.whatsapp.com/', 'WAPopup')" title="Abrir WhatsApp">
                     <span class="material-symbols-outlined">forum</span> WA
                 </button>
-                <button class="btn-control btn-outlook" onclick="abrirVentanaFlotante('https://outlook.office.com/mail/', 'OutlookPopup')" title="Abrir Outlook">
+                <button class="btn-control btn-outlook" onclick="abrirVentanaFlotante(event, 'https://outlook.office.com/mail/', 'OutlookPopup')" title="Abrir Outlook">
                     <span class="material-symbols-outlined">mail</span> Correo
                 </button>
-                <button class="btn-control btn-contactos" onclick="abrirVentanaFlotante('https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" title="Contactos Flotante">
+                <button class="btn-control btn-contactos" onclick="abrirVentanaFlotante(event, 'https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" title="Contactos Flotante">
                     <span class="material-symbols-outlined">contact_phone</span> Contactos
                 </button>
                 
                 <div class="separator"></div>
 
-                <button class="btn-control btn-simpli" onclick="traerVentanaAlFrente('SimpliRoutePopup')" title="Llamar ventana de SimpliRoute">
+                <button class="btn-control btn-simpli" onclick="traerVentanaAlFrente(event, 'SimpliRoutePopup')" title="Llamar ventana de SimpliRoute">
                     <span class="material-symbols-outlined">flip_to_front</span> SimpliRoute
                 </button>
-                <button class="btn-control btn-lct" onclick="traerVentanaAlFrente('LCTPopup')" title="Llamar ventana de LCT">
-                    <span class="material-symbols-outlined">flip_to_front</span> LCT
-                </button>
-                <button class="btn-control btn-genesys" onclick="traerVentanaAlFrente('GenesysPopup')" title="Llamar ventana de Genesys">
-                    <span class="material-symbols-outlined">headset_mic</span> Genesys
-                </button>
-                <button class="btn-control btn-workfast" onclick="traerVentanaAlFrente('WorkfastPopup')" title="Llamar ventana de Workfast">
-                    <span class="material-symbols-outlined">work</span> Workfast
+                <button class="btn-control btn-lct" onclick="traerVentanaAlFrente(event, 'LCTPopup')" title="Llamar ventana de LCT">
+                    <span class="material-symbols-outlined">flip_to_front</span> LCT - Reclamos OC
                 </button>
             </div>
             
@@ -76,6 +70,7 @@
                 <button class="btn-control btn-tutorial-trigger" onclick="iniciarTutorial()" title="Ver Tutorial de Uso">
                     <span class="material-symbols-outlined">help</span> Ayuda
                 </button>
+
                 <div class="pet-selector-container">
                     <span class="material-symbols-outlined" style="color:#64748b; font-size: 18px;">pets</span>
                     <select id="pet-selector" class="btn-control pet-btn" onchange="cambiarMascota()">
@@ -110,26 +105,6 @@
             <div id="LCT_AgenteIA" class="tabcontent"><div class="window-header"><span class="material-symbols-outlined">support_agent</span> Agente IA - LCT</div><iframe src="https://lct.falabella.supply/lct-dashboard/#/application/home-delivery/ayuda-en-ruta-web"></iframe></div>
             <div id="LCT_Guias" class="tabcontent"><div class="window-header"><span class="material-symbols-outlined">receipt_long</span> Guías de despacho</div><iframe src="https://lct.falabella.supply/lct-dashboard/#/application/home-delivery/dispatch-guide"></iframe></div>
             <div id="Soporte_Consolidado" class="tabcontent"><div class="window-header"><span class="material-symbols-outlined">view_list</span> Consolidado Soporte</div><iframe src="https://docs.google.com/spreadsheets/d/12fHing4FhzXps3OygKZ3pRv4qJ2WYgRTpxtPkKQJ6tM/edit?rm=minimal&gid=0"></iframe></div>
-
-            <div id="Soporte_Genesys" class="tabcontent">
-                <div class="window-header"><span class="material-symbols-outlined">headset_mic</span> Genesys Cloud</div>
-                <div class="launcher-container">
-                    <span class="material-symbols-outlined launcher-icon">picture_in_picture_alt</span>
-                    <h3>Modo Ventana Flotante</h3>
-                    <p>Por seguridad corporativa, esta plataforma bloquea la visualización interna. Haz clic para abrirla en una mini-ventana operativa.</p>
-                    <button onclick="abrirVentanaFlotante('https://apps.usw2.pure.cloud/directory/#/home', 'GenesysPopup')" class="btn-launcher" style="background-color: #f97316;">Abrir Genesys 🪟</button>
-                </div>
-            </div>
-
-            <div id="Soporte_Workfast" class="tabcontent">
-                <div class="window-header"><span class="material-symbols-outlined">work</span> Workfast</div>
-                <div class="launcher-container">
-                    <span class="material-symbols-outlined launcher-icon">picture_in_picture_alt</span>
-                    <h3>Modo Ventana Flotante</h3>
-                    <p>Por seguridad corporativa, esta plataforma bloquea la visualización interna. Haz clic para abrirla en una mini-ventana operativa.</p>
-                    <button onclick="abrirVentanaFlotante('https://falabella-workflow.workfast.cl/form/home.aspx?a=1&b=1', 'WorkfastPopup')" class="btn-launcher" style="background-color: #6366f1;">Abrir Workfast 🪟</button>
-                </div>
-            </div>
 
             <div id="Notas_Mensajes" class="tabcontent">
                 <div class="window-header"><span class="material-symbols-outlined">quickreply</span> Plantillas Rápidas</div>
@@ -182,8 +157,7 @@ Recordar que el folio debe ser rebajado como cliente rechaza y el comentario deb
                 <h2><span class="material-symbols-outlined" style="vertical-align: middle;">settings</span> Personalizar Herramientas</h2>
                 <p style="font-size:12px; color:#64748b; margin-top:5px;">Activa o desactiva las pestañas para el perfil: <strong id="modal-profile-name" style="color:#0f172a;"></strong></p>
             </div>
-            <div class="modal-body" id="modal-tools-list">
-                </div>
+            <div class="modal-body" id="modal-tools-list"></div>
             <div class="modal-footer">
                 <button class="modal-btn btn-cancel" onclick="cerrarModalPerfil()">Cancelar</button>
                 <button class="modal-btn btn-save" onclick="guardarPersonalizacion()">Guardar Cambios</button>

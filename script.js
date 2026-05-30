@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES
+   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES (Sin Emojis)
    ========================================================================== */
 
 const DEFINICION_HERRAMIENTAS = {
@@ -15,9 +15,9 @@ const DEFINICION_HERRAMIENTAS = {
     ],
     "SimpliRoute": [
         { id: "SR_Principal", icon: "route", text: "Página Principal", call: "abrirPestana(event, 'SR_Principal')" },
-        { id: "SR_Flotas", icon: "directions_car", text: "Flotas (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/settings/fleets', 'SimpliRoutePopup')" },
-        { id: "SR_Seguimiento", icon: "share_location", text: "Seguimiento (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959', 'SimpliRoutePopup')" },
-        { id: "SR_Extensiones", icon: "extension", text: "Extensiones (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/es/extensions', 'SimpliRoutePopup')" }
+        { id: "SR_Flotas", icon: "directions_car", text: "Flotas (Flotante)", call: "abrirVentanaFlotante(event, 'https://app3.simpliroute.com/settings/fleets', 'SimpliRoutePopup')" },
+        { id: "SR_Seguimiento", icon: "share_location", text: "Seguimiento (Flotante)", call: "abrirVentanaFlotante(event, 'https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959', 'SimpliRoutePopup')" },
+        { id: "SR_Extensiones", icon: "extension", text: "Extensiones (Flotante)", call: "abrirVentanaFlotante(event, 'https://app3.simpliroute.com/es/extensions', 'SimpliRoutePopup')" }
     ],
     "Geosort": [
         { id: "GS_Reporte", icon: "analytics", text: "Reporte Planificación", call: "abrirPestana(event, 'GS_Reporte')" },
@@ -28,17 +28,17 @@ const DEFINICION_HERRAMIENTAS = {
     "Herramientas LCT": [
         { id: "LCT_AgenteIA", icon: "support_agent", text: "Agente IA - LCT", call: "abrirPestana(event, 'LCT_AgenteIA')" },
         { id: "LCT_Guias", icon: "receipt_long", text: "Guías de despacho", call: "abrirPestana(event, 'LCT_Guias')" },
-        { id: "LCT_Reclamos", icon: "gavel", text: "Reclamos (Flotante)", call: "abrirVentanaFlotante('https://logistics.falabella.services/lct/lct-login.html', 'LCTPopup')" }
+        { id: "LCT_Reclamos", icon: "gavel", text: "Reclamos (Flotante)", call: "abrirVentanaFlotante(event, 'https://logistics.falabella.services/lct/lct-login.html', 'LCTPopup')" }
     ],
     "Soporte y Contactos": [
-        { id: "Soporte_Contactos", icon: "contact_phone", text: "Contactos (Flotante)", call: "abrirVentanaFlotante('https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" },
+        { id: "Soporte_Contactos", icon: "contact_phone", text: "Contactos (Flotante)", call: "abrirVentanaFlotante(event, 'https://datastudio.google.com/reporting/9f41cc74-1a3c-428b-b2e7-7868d503c4c7/page/My9WF', 'LookerPopup')" },
         { id: "Soporte_Consolidado", icon: "view_list", text: "Consolidado Soporte", call: "abrirPestana(event, 'Soporte_Consolidado')" },
-        { id: "Soporte_Genesys", icon: "headset_mic", text: "Genesys Cloud", call: "abrirVentanaFlotante('https://apps.usw2.pure.cloud/directory/#/home', 'GenesysPopup')" },
-        { id: "Soporte_Workfast", icon: "work", text: "Workfast", call: "abrirVentanaFlotante('https://falabella-workflow.workfast.cl/form/home.aspx?a=1&b=1', 'WorkfastPopup')" }
+        { id: "Soporte_Genesys", icon: "headset_mic", text: "Genesys Cloud", call: "abrirVentanaFlotante(event, 'https://apps.usw2.pure.cloud/directory/#/home', 'GenesysPopup')" },
+        { id: "Soporte_Workfast", icon: "work", text: "Workfast", call: "abrirVentanaFlotante(event, 'https://falabella-workflow.workfast.cl/form/home.aspx?a=1&b=1', 'WorkfastPopup')" }
     ],
     "Mensajería y Correo": [
-        { id: "App_WhatsApp", icon: "forum", text: "WhatsApp Web", call: "abrirVentanaFlotante('https://web.whatsapp.com/', 'WAPopup')" },
-        { id: "App_Outlook", icon: "mail", text: "Correo Outlook", call: "abrirVentanaFlotante('https://outlook.office.com/mail/', 'OutlookPopup')" }
+        { id: "App_WhatsApp", icon: "forum", text: "WhatsApp Web", call: "abrirVentanaFlotante(event, 'https://web.whatsapp.com/', 'WAPopup')" },
+        { id: "App_Outlook", icon: "mail", text: "Correo Outlook", call: "abrirVentanaFlotante(event, 'https://outlook.office.com/mail/', 'OutlookPopup')" }
     ],
     "Plantillas Rápidas": [
         { id: "Notas_Mensajes", icon: "quickreply", text: "Plantillas de Mensajes", call: "abrirPestana(event, 'Notas_Mensajes')" }
@@ -84,7 +84,7 @@ const PERFILES_DEFAULT = {
     }
 };
 
-let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v8'));
+let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v9'));
 if (!perfilesGuardados || Object.keys(perfilesGuardados).length === 0) {
     perfilesGuardados = JSON.parse(JSON.stringify(PERFILES_DEFAULT));
 }
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function guardarEnStorage() {
-    localStorage.setItem('perfiles_hub_lof1_v8', JSON.stringify(perfilesGuardados));
+    localStorage.setItem('perfiles_hub_lof1_v9', JSON.stringify(perfilesGuardados));
 }
 
 /* ==========================================================================
@@ -397,24 +397,47 @@ function copiarMensaje(cardElement, index) {
     }).catch(err => console.error('Error al copiar: ', err));
 }
 
-let ventanasFlotantes = {};
 
-function abrirVentanaFlotante(url, winName) {
-    // MAGIA DE APERTURA INTELIGENTE: Si la ventana ya existe y no la han cerrado, 
-    // solo la traemos al frente, evitando que se recargue (vital para WhatsApp Web).
-    if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
-        ventanasFlotantes[winName].focus();
-        return;
+/* ==========================================================================
+   CONTROL DE VENTANAS FLOTANTES (APERTURA INTELIGENTE CON MEMORIA)
+   ========================================================================== */
+// Usar variable global protegida para evitar borrado total si es posible
+let ventanasFlotantes = window.ventanasFlotantes || {};
+
+function mostrarAvisoFoco(winName) {
+    let aviso = document.createElement('div');
+    aviso.innerHTML = `La ventana ya está abierta. <br><span style="font-size: 11px; color: #94a3b8;">Si no la ves, revisa tu barra de tareas abajo.</span>`;
+    aviso.style.position = 'fixed'; aviso.style.bottom = '20px'; aviso.style.left = '50%';
+    aviso.style.transform = 'translateX(-50%)'; aviso.style.background = '#0f172a';
+    aviso.style.color = '#B2D234'; aviso.style.padding = '12px 24px';
+    aviso.style.borderRadius = '8px'; aviso.style.zIndex = '9999';
+    aviso.style.boxShadow = '0 10px 15px rgba(0,0,0,0.3)';
+    aviso.style.textAlign = 'center'; aviso.style.fontWeight = '600';
+    document.body.appendChild(aviso);
+    setTimeout(() => aviso.remove(), 3500);
+}
+
+function abrirVentanaFlotante(e, url, winName) {
+    if (e && e.preventDefault) e.preventDefault(); // Evita recargas de la página accidentalmente
+
+    try {
+        // MAGIA: Si la ventana ya existe en nuestra memoria y NO está cerrada...
+        if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
+            ventanasFlotantes[winName].focus(); // La traemos al frente
+            mostrarAvisoFoco(winName); // Avisamos al usuario por si Windows la bloquea en la barra de tareas
+            return; // ¡DETENEMOS LA FUNCIÓN AQUÍ PARA QUE NO RECARGUE LA URL!
+        }
+    } catch(err) {
+        console.log("Revisando estado de ventana...");
     }
 
+    // Si llegamos hasta aquí, es porque la ventana no existía o el usuario recargó la página con F5
     let width = 1100; let height = 750;
-    
-    // Tamaños personalizados según la herramienta
     if (url.includes("whatsapp")) { width = 850; height = 800; }
     if (url.includes("outlook")) { width = 1000; height = 800; }
     if (url.includes("datastudio")) { width = 1200; height = 800; }
-    if (url.includes("pure.cloud")) { width = 1200; height = 800; } // Genesys
-    if (url.includes("workfast")) { width = 1100; height = 800; } // Workfast
+    if (url.includes("pure.cloud")) { width = 1200; height = 800; } 
+    if (url.includes("workfast")) { width = 1100; height = 800; } 
 
     const left = (screen.width - width) / 2; const top = (screen.height - height) / 2;
     ventanasFlotantes[winName] = window.open(url, winName, `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes`);
@@ -424,9 +447,14 @@ function abrirVentanaFlotante(url, winName) {
     }
 }
 
-function traerVentanaAlFrente(winName) {
-    if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) ventanasFlotantes[winName].focus();
-    else alert("¡Primero debes abrir esta herramienta para poder traerla al frente!");
+function traerVentanaAlFrente(e, winName) {
+    if(e && e.preventDefault) e.preventDefault();
+    if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
+        ventanasFlotantes[winName].focus();
+        mostrarAvisoFoco(winName);
+    } else {
+        alert("¡Primero debes abrir esta herramienta desde tu menú izquierdo o barra superior para poder traerla al frente!");
+    }
 }
 
 /* ==========================================================================
