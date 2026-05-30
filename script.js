@@ -1,8 +1,7 @@
 /* ==========================================================================
-   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES
+   CONFIGURACIÓN MAESTRA DE HERRAMIENTAS Y PERFILES (Sin Emojis)
    ========================================================================== */
 
-// Pool de TODAS las extensiones disponibles en la Torre de Control
 const DEFINICION_HERRAMIENTAS = {
     "Planillas Estratégicas": [
         { id: "SP_Priorizaciones", icon: "format_list_numbered", text: "Priorizaciones", call: "abrirPestana(event, 'SP_Priorizaciones')" },
@@ -16,9 +15,9 @@ const DEFINICION_HERRAMIENTAS = {
     ],
     "SimpliRoute": [
         { id: "SR_Principal", icon: "route", text: "Página Principal", call: "abrirPestana(event, 'SR_Principal')" },
-        { id: "SR_Flotas", icon: "directions_car", text: "Flotas (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/settings/fleets')" },
-        { id: "SR_Seguimiento", icon: "share_location", text: "Seguimiento (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959')" },
-        { id: "SR_Extensiones", icon: "extension", text: "Extensiones (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/es/extensions')" }
+        { id: "SR_Flotas", icon: "directions_car", text: "Flotas (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/settings/fleets', 'SimpliRoutePopup')" },
+        { id: "SR_Seguimiento", icon: "share_location", text: "Seguimiento (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/tracking/2026-05-13/vehicles?fleet=44959', 'SimpliRoutePopup')" },
+        { id: "SR_Extensiones", icon: "extension", text: "Extensiones (Flotante)", call: "abrirVentanaFlotante('https://app3.simpliroute.com/es/extensions', 'SimpliRoutePopup')" }
     ],
     "Geosort": [
         { id: "GS_Reporte", icon: "analytics", text: "Reporte Planificación", call: "abrirPestana(event, 'GS_Reporte')" },
@@ -29,18 +28,17 @@ const DEFINICION_HERRAMIENTAS = {
     "Herramientas LCT": [
         { id: "LCT_AgenteIA", icon: "support_agent", text: "Agente IA - LCT", call: "abrirPestana(event, 'LCT_AgenteIA')" },
         { id: "LCT_Guias", icon: "receipt_long", text: "Guías de despacho", call: "abrirPestana(event, 'LCT_Guias')" },
-        { id: "LCT_Reclamos", icon: "gavel", text: "LCT - Reclamos", call: "abrirPestana(event, 'LCT_Reclamos')" }
+        { id: "LCT_Reclamos", icon: "gavel", text: "Reclamos (Flotante)", call: "abrirVentanaFlotante('https://logistics.falabella.services/lct/lct-login.html', 'LCTPopup')" }
     ],
     "Soporte y Contactos": [
         { id: "Soporte_Contactos", icon: "contact_phone", text: "Contactos", call: "abrirPestana(event, 'Soporte_Contactos')" },
         { id: "Soporte_Consolidado", icon: "view_list", text: "Consolidado Soporte", call: "abrirPestana(event, 'Soporte_Consolidado')" }
     ],
-    "Herramientas": [
-        { id: "Notas_Mensajes", icon: "quickreply", text: "Plantillas Rápidas", call: "abrirPestana(event, 'Notas_Mensajes')" }
+    "Plantillas Rápidas": [
+        { id: "Notas_Mensajes", icon: "quickreply", text: "Plantillas de Mensajes", call: "abrirPestana(event, 'Notas_Mensajes')" }
     ]
 };
 
-// Perfiles Base por si el usuario es nuevo o borró todo
 const PERFILES_DEFAULT = {
     "seguimiento": {
         nombre: "Eq. Seguimiento",
@@ -51,7 +49,7 @@ const PERFILES_DEFAULT = {
             "Geosort": { collapsed: false, items: ["GS_Reporte", "GS_Seguimiento", "GS_AdminRutas", "GS_PlanifSectores"] },
             "Herramientas LCT": { collapsed: false, items: ["LCT_AgenteIA", "LCT_Guias", "LCT_Reclamos"] },
             "Soporte y Contactos": { collapsed: true, items: ["Soporte_Contactos", "Soporte_Consolidado"] },
-            "Herramientas": { collapsed: false, items: ["Notas_Mensajes"] }
+            "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     },
     "soporte": {
@@ -61,7 +59,7 @@ const PERFILES_DEFAULT = {
             "Planillas Estratégicas": { collapsed: true, items: ["SP_CasosVIP", "SP_NoPago", "SP_MantenedorIA"] },
             "Soporte y Contactos": { collapsed: false, items: ["Soporte_Contactos", "Soporte_Consolidado"] },
             "Herramientas LCT": { collapsed: false, items: ["LCT_Reclamos", "LCT_AgenteIA"] },
-            "Herramientas": { collapsed: false, items: ["Notas_Mensajes"] }
+            "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     },
     "comunicaciones": {
@@ -71,28 +69,28 @@ const PERFILES_DEFAULT = {
             "Planillas Estratégicas": { collapsed: false, items: ["SP_Comunicaciones"] },
             "SimpliRoute": { collapsed: false, items: ["SR_Seguimiento"] },
             "Geosort": { collapsed: false, items: ["GS_Seguimiento"] },
-            "Herramientas": { collapsed: false, items: ["Notas_Mensajes"] }
+            "Plantillas Rápidas": { collapsed: false, items: ["Notas_Mensajes"] }
         }
     }
 };
 
-// Cargar desde LocalStorage (Clave V3 para la nueva estructura)
-let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v3'));
+// Modificamos la clave de Storage para forzar la actualización limpia sin emojis antiguos
+let perfilesGuardados = JSON.parse(localStorage.getItem('perfiles_hub_lof1_v4'));
 if (!perfilesGuardados || Object.keys(perfilesGuardados).length === 0) {
-    perfilesGuardados = JSON.parse(JSON.stringify(PERFILES_DEFAULT)); // Clon profundo
+    perfilesGuardados = JSON.parse(JSON.stringify(PERFILES_DEFAULT));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarSelectorPerfiles();
-    cambiarPerfil(); // Inicia renderizado visual
+    cambiarPerfil(); 
 });
 
 function guardarEnStorage() {
-    localStorage.setItem('perfiles_hub_lof1_v3', JSON.stringify(perfilesGuardados));
+    localStorage.setItem('perfiles_hub_lof1_v4', JSON.stringify(perfilesGuardados));
 }
 
 /* ==========================================================================
-   SISTEMA DE GESTIÓN DE PERFILES (CREAR, BORRAR, CAMBIAR)
+   SISTEMA DE GESTIÓN DE PERFILES
    ========================================================================== */
 
 function cargarSelectorPerfiles() {
@@ -113,13 +111,12 @@ function cargarSelectorPerfiles() {
 }
 
 function crearNuevoPerfil() {
-    const nombre = prompt("¿Qué nombre le pondrás a este nuevo perfil?\n(Ej: Turno Tarde, Fin de Semana, Reclamos...)");
+    const nombre = prompt("Ingresa el nombre para el nuevo perfil:\n(Ej: Turno Noche, Monitoreo...)");
     if (!nombre || nombre.trim() === "") return;
 
     const nuevoId = "perfil_" + Date.now();
     const perfilActualId = document.getElementById('team-profile-selector').value;
     
-    // El nuevo perfil hereda las herramientas del perfil que tenías seleccionado
     perfilesGuardados[nuevoId] = {
         nombre: nombre.trim(),
         mascota: "corgi",
@@ -134,14 +131,12 @@ function crearNuevoPerfil() {
 
 function eliminarPerfilActual() {
     const perfilActualId = document.getElementById('team-profile-selector').value;
-    
-    // Proteger el perfil principal
     if(perfilActualId === 'seguimiento') {
-        alert("🛡️ Por seguridad operativa, el perfil 'Eq. Seguimiento' no se puede eliminar.");
+        alert("Por seguridad operativa, el perfil 'Eq. Seguimiento' no se puede eliminar.");
         return;
     }
 
-    if (confirm(`¿Estás completamente seguro de eliminar el perfil "${perfilesGuardados[perfilActualId].nombre}"?`)) {
+    if (confirm(`¿Estás seguro de eliminar el perfil "${perfilesGuardados[perfilActualId].nombre}"?`)) {
         delete perfilesGuardados[perfilActualId];
         guardarEnStorage();
         cargarSelectorPerfiles();
@@ -153,7 +148,6 @@ function cambiarPerfil() {
     const perfilActualId = document.getElementById('team-profile-selector').value;
     const perfil = perfilesGuardados[perfilActualId];
     
-    // Cargar la mascota preferida de este equipo
     document.getElementById('pet-selector').value = perfil.mascota || "corgi";
     actualizarMascotaUI(perfil.mascota || "corgi");
     
@@ -162,7 +156,7 @@ function cambiarPerfil() {
 }
 
 /* ==========================================================================
-   RENDERIZADO DINÁMICO DEL MENÚ Y ARRASTRE (DRAG & DROP)
+   RENDERIZADO DINÁMICO DEL MENÚ Y ARRASTRE
    ========================================================================== */
 
 function renderizarMenuLateral() {
@@ -173,13 +167,12 @@ function renderizarMenuLateral() {
 
     Object.keys(DEFINICION_HERRAMIENTAS).forEach(sectionName => {
         const sectionConfig = config[sectionName];
-        if (!sectionConfig || sectionConfig.items.length === 0) return; // Omitir secciones vacías
+        if (!sectionConfig || sectionConfig.items.length === 0) return;
 
         const wrapper = document.createElement('div');
         wrapper.className = 'menu-section-wrapper';
         wrapper.dataset.section = sectionName;
 
-        // Cabecera (Click para contraer/expandir)
         const header = document.createElement('div');
         header.className = `menu-section-header ${sectionConfig.collapsed ? 'collapsed' : ''}`;
         header.onclick = () => toggleSection(wrapper);
@@ -195,14 +188,11 @@ function renderizarMenuLateral() {
         header.appendChild(textSpan);
         header.appendChild(caretSpan);
 
-        // Contenedor de Botones (Arrastrable)
         const content = document.createElement('div');
         content.className = `menu-section-content ${sectionConfig.collapsed ? 'collapsed' : ''}`;
-
         content.addEventListener('dragover', handleDragOver);
         content.addEventListener('drop', handleDrop);
 
-        // Crear Botones según el orden guardado
         sectionConfig.items.forEach(itemId => {
             const tool = DEFINICION_HERRAMIENTAS[sectionName].find(t => t.id === itemId);
             if (tool) {
@@ -211,7 +201,6 @@ function renderizarMenuLateral() {
                 btn.id = 'btn-' + tool.id;
                 btn.draggable = true;
                 btn.setAttribute('onclick', tool.call);
-                
                 btn.addEventListener('dragstart', handleDragStart);
                 btn.addEventListener('dragend', handleDragEnd);
 
@@ -243,19 +232,10 @@ function toggleSection(wrapper) {
     guardarEstadoPerfil();
 }
 
-/* LÓGICA DE DRAG AND DROP (Arrastrar Pestañas) */
 let draggedItem = null;
-
-function handleDragStart(e) {
-    draggedItem = this;
-    setTimeout(() => this.classList.add('dragging'), 0);
-}
-
-function handleDragEnd(e) {
-    this.classList.remove('dragging');
-    draggedItem = null;
-    guardarEstadoPerfil(); // Guardar el nuevo orden al soltar
-}
+function handleDragStart(e) { draggedItem = this; setTimeout(() => this.classList.add('dragging'), 0); }
+function handleDragEnd(e) { this.classList.remove('dragging'); draggedItem = null; guardarEstadoPerfil(); }
+function handleDrop(e) { }
 
 function handleDragOver(e) {
     e.preventDefault();
@@ -267,8 +247,6 @@ function handleDragOver(e) {
         container.insertBefore(draggedItem, afterElement);
     }
 }
-
-function handleDrop(e) { }
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.tablinks:not(.dragging)')];
@@ -283,7 +261,6 @@ function getDragAfterElement(container, y) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-/* GUARDAR EL ESTADO (Colapso y Orden) EN LOCALSTORAGE */
 function guardarEstadoPerfil() {
     const perfilActualId = document.getElementById('team-profile-selector').value;
     const config = perfilesGuardados[perfilActualId].config;
@@ -297,24 +274,19 @@ function guardarEstadoPerfil() {
         config[sectionName].collapsed = isCollapsed;
         config[sectionName].items = items;
     });
-
     guardarEnStorage();
 }
 
 /* ==========================================================================
-   MODAL DE PERSONALIZACIÓN DE PESTAÑAS
+   MODAL DE PERSONALIZACIÓN
    ========================================================================== */
 function abrirModalPerfil() {
     const perfilActualId = document.getElementById('team-profile-selector').value;
-    const nombre = perfilesGuardados[perfilActualId].nombre;
-    document.getElementById('modal-profile-name').innerText = nombre;
-    
+    document.getElementById('modal-profile-name').innerText = perfilesGuardados[perfilActualId].nombre;
     const listDiv = document.getElementById('modal-tools-list');
     listDiv.innerHTML = '';
-
     const config = perfilesGuardados[perfilActualId].config;
 
-    // Crear Checkboxes para todas las herramientas disponibles en el Pool
     Object.keys(DEFINICION_HERRAMIENTAS).forEach(section => {
         const secTitle = document.createElement('div');
         secTitle.className = 'modal-section-title';
@@ -330,7 +302,6 @@ function abrirModalPerfil() {
             cb.value = tool.id;
             cb.dataset.section = section;
             
-            // Marcar si ya está activo en el perfil
             if(config[section] && config[section].items.includes(tool.id)) {
                 cb.checked = true;
             }
@@ -340,21 +311,16 @@ function abrirModalPerfil() {
             listDiv.appendChild(label);
         });
     });
-
     document.getElementById('modal-perfil').classList.remove('oculto');
 }
 
-function cerrarModalPerfil() {
-    document.getElementById('modal-perfil').classList.add('oculto');
-}
+function cerrarModalPerfil() { document.getElementById('modal-perfil').classList.add('oculto'); }
 
 function guardarPersonalizacion() {
     const perfilActualId = document.getElementById('team-profile-selector').value;
     const configActual = perfilesGuardados[perfilActualId].config;
-    
     const nuevaConfig = {};
     
-    // Preparar estructura base manteniendo colapsos
     Object.keys(DEFINICION_HERRAMIENTAS).forEach(section => {
         nuevaConfig[section] = {
             collapsed: configActual[section] ? configActual[section].collapsed : false,
@@ -362,49 +328,37 @@ function guardarPersonalizacion() {
         };
     });
 
-    // Agregar lo marcado
     const checkboxes = document.querySelectorAll('#modal-tools-list input[type="checkbox"]');
     checkboxes.forEach(cb => {
-        if (cb.checked) {
-            nuevaConfig[cb.dataset.section].items.push(cb.value);
-        }
+        if (cb.checked) nuevaConfig[cb.dataset.section].items.push(cb.value);
     });
 
-    // Respetar el orden previo que el usuario había arrastrado
     Object.keys(nuevaConfig).forEach(section => {
         const oldItems = configActual[section] ? configActual[section].items : [];
         nuevaConfig[section].items.sort((a, b) => {
-            let idxA = oldItems.indexOf(a);
-            let idxB = oldItems.indexOf(b);
-            if (idxA === -1) idxA = 999;
-            if (idxB === -1) idxB = 999;
+            let idxA = oldItems.indexOf(a); let idxB = oldItems.indexOf(b);
+            if (idxA === -1) idxA = 999; if (idxB === -1) idxB = 999;
             return idxA - idxB;
         });
     });
 
     perfilesGuardados[perfilActualId].config = nuevaConfig;
     guardarEnStorage();
-    
     cerrarModalPerfil();
     renderizarMenuLateral();
 }
 
 /* ==========================================================================
-   NAVEGACIÓN MULTIPANTALLA Y MENÚ LATERAL
+   NAVEGACIÓN MULTIPANTALLA (SISTEMA DE VENTANAS MÓVILES)
    ========================================================================== */
 let isSplitMode = false;
+let activeZIndex = 100;
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const toggleIcon = document.getElementById('toggle-icon');
-    
     sidebar.classList.toggle('collapsed');
-    
-    if (sidebar.classList.contains('collapsed')) {
-        toggleIcon.innerText = "menu"; 
-    } else {
-        toggleIcon.innerText = "menu_open"; 
-    }
+    toggleIcon.innerText = sidebar.classList.contains('collapsed') ? "menu" : "menu_open"; 
 }
 
 function toggleSplitMode() {
@@ -416,10 +370,30 @@ function toggleSplitMode() {
         container.classList.add('split-mode');
         btnSplit.innerHTML = '<span class="material-symbols-outlined">splitscreen</span> Modo Multipantalla: ON';
         btnSplit.classList.add('active');
+
+        // Acomodar las ventanas activas en cascada simulando un Escritorio
+        let offset = 20;
+        document.querySelectorAll('.tabcontent.active-tab').forEach(tab => {
+            activeZIndex++;
+            tab.style.zIndex = activeZIndex;
+            tab.style.left = offset + 'px';
+            tab.style.top = offset + 'px';
+            tab.style.width = '45%';
+            tab.style.height = '60%';
+            tab.style.position = 'absolute';
+            offset += 40;
+        });
     } else {
         container.classList.remove('split-mode');
         btnSplit.innerHTML = '<span class="material-symbols-outlined">splitscreen</span> Modo Multipantalla: OFF';
         btnSplit.classList.remove('active');
+        
+        // Restaurar estilos al quitar multipantalla
+        document.querySelectorAll('.tabcontent').forEach(tab => {
+            tab.style.left = ''; tab.style.top = '';
+            tab.style.width = '100%'; tab.style.height = '100%';
+            tab.style.position = ''; tab.style.zIndex = '';
+        });
         resetViews();
     }
 }
@@ -427,8 +401,7 @@ function toggleSplitMode() {
 function abrirPestana(evt, nombrePestana) {
     let btn = evt.currentTarget || evt.target.closest('.tablinks');
     let target = document.getElementById(nombrePestana);
-
-    if (!target) return; // Evitar errores si se eliminó una ventana
+    if (!target) return; 
 
     if (!isSplitMode) {
         document.querySelectorAll(".tabcontent").forEach(el => el.classList.remove("active-tab"));
@@ -436,8 +409,20 @@ function abrirPestana(evt, nombrePestana) {
         target.classList.add("active-tab");
         if (btn) btn.classList.add("active");
     } else {
+        const wasActive = target.classList.contains("active-tab");
         target.classList.toggle("active-tab");
         if (btn) btn.classList.toggle("active");
+
+        if (!wasActive) {
+            // Posicionar nueva ventana en el centro del escritorio virtual
+            activeZIndex++;
+            target.style.zIndex = activeZIndex;
+            target.style.left = '50px';
+            target.style.top = '50px';
+            target.style.width = '450px';
+            target.style.height = '400px';
+            target.style.position = 'absolute';
+        }
     }
 }
 
@@ -449,28 +434,74 @@ function resetViews() {
     btnSplit.innerHTML = '<span class="material-symbols-outlined">splitscreen</span> Modo Multipantalla: OFF';
     btnSplit.classList.remove('active');
 
-    document.querySelectorAll(".tabcontent").forEach(el => el.classList.remove("active-tab"));
+    document.querySelectorAll(".tabcontent").forEach(el => {
+        el.classList.remove("active-tab");
+        el.style.left = ''; el.style.top = '';
+        el.style.width = '100%'; el.style.height = '100%';
+        el.style.position = ''; el.style.zIndex = '';
+    });
     document.querySelectorAll(".sidebar .tablinks").forEach(el => el.classList.remove("active"));
 
-    // Simular clic en la primera pestaña que esté visible según el perfil
     const primerBoton = document.querySelector('.sidebar .tablinks');
-    if(primerBoton) {
-        primerBoton.click();
-    }
+    if(primerBoton) primerBoton.click();
 }
 
+/* Lógica de Arrastre de Ventanas (Drag & Drop en Multipantalla) */
+let isDraggingWindow = false;
+let dragTarget = null;
+let startXW, startYW, initialLeftW, initialTopW;
+
+document.querySelectorAll('.tabcontent').forEach(tab => {
+    const header = tab.querySelector('.window-header');
+    
+    // Al hacer clic, la ventana pasa al frente
+    tab.addEventListener('mousedown', () => {
+        if(isSplitMode) {
+            activeZIndex++;
+            tab.style.zIndex = activeZIndex;
+        }
+    });
+
+    if(header) {
+        header.addEventListener('mousedown', (e) => {
+            if (!isSplitMode) return;
+            isDraggingWindow = true;
+            dragTarget = tab;
+            startXW = e.clientX;
+            startYW = e.clientY;
+            initialLeftW = tab.offsetLeft;
+            initialTopW = tab.offsetTop;
+            document.body.classList.add('dragging-window'); 
+        });
+    }
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDraggingWindow || !dragTarget) return;
+    const dx = e.clientX - startXW;
+    const dy = e.clientY - startYW;
+    dragTarget.style.left = `${initialLeftW + dx}px`;
+    dragTarget.style.top = `${initialTopW + dy}px`;
+});
+
+document.addEventListener('mouseup', () => {
+    if(isDraggingWindow) {
+        isDraggingWindow = false;
+        dragTarget = null;
+        document.body.classList.remove('dragging-window');
+    }
+});
+
 /* ==========================================================================
-   HERRAMIENTAS ADICIONALES (COPIAR, SIMPLIROUTE FLOTANTE, MASCOTAS)
+   HERRAMIENTAS: PLANTILLAS RÁPIDAS
    ========================================================================== */
 function copiarMensaje(cardElement, index) {
     const textoACopiar = document.getElementById(`msg-${index}`).innerText;
-
     navigator.clipboard.writeText(textoACopiar).then(() => {
         cardElement.classList.add('copied');
         const boton = cardElement.querySelector('.btn-copy');
         const textoOriginalBoton = boton.innerText;
         boton.innerText = "¡Copiado ✓!";
-
         setTimeout(() => {
             cardElement.classList.remove('copied');
             boton.innerText = textoOriginalBoton;
@@ -478,37 +509,34 @@ function copiarMensaje(cardElement, index) {
     }).catch(err => console.error('Error al copiar: ', err));
 }
 
-let ventanaSimpli = null;
+/* ==========================================================================
+   CONTROL DE VENTANAS FLOTANTES EXTERNAS (LCT Y SIMPLIROUTE)
+   ========================================================================== */
+let ventanasFlotantes = {};
 
-function abrirVentanaFlotante(url) {
-    const width = 1100;
-    const height = 750;
-    const left = (screen.width - width) / 2;
-    const top = (screen.height - height) / 2;
-
-    ventanaSimpli = window.open(
-        url, 
-        'SimpliRoutePopup', 
+function abrirVentanaFlotante(url, winName) {
+    const width = 1100; const height = 750;
+    const left = (screen.width - width) / 2; const top = (screen.height - height) / 2;
+    ventanasFlotantes[winName] = window.open(
+        url, winName, 
         `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes`
     );
-
-    if (ventanaSimpli) {
-        ventanaSimpli.focus();
-    }
+    if (ventanasFlotantes[winName]) ventanasFlotantes[winName].focus();
 }
 
-function traerSimpliAlFrente() {
-    if (ventanaSimpli && !ventanaSimpli.closed) {
-        ventanaSimpli.focus();
+function traerVentanaAlFrente(winName) {
+    if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
+        ventanasFlotantes[winName].focus();
     } else {
-        alert("¡Primero debes abrir Flotas, Seguimiento o Extensiones desde el menú izquierdo!");
+        alert("Primero debes abrir esta herramienta desde el menú lateral izquierdo.");
     }
 }
 
-/* --- LÓGICA DE LA MASCOTA VIRTUAL PRO 🐾 --- */
+/* ==========================================================================
+   LA MASCOTA VIRTUAL PRO
+   ========================================================================== */
 const petContainer = document.getElementById('pet-container');
 const petSpeech = document.getElementById('pet-speech');
-
 let mascotaActual = 'corgi';
 let saludoInicial = "¡Guau! ";
 let audioActual = new Audio('ladrido.mp3'); 
@@ -521,7 +549,6 @@ function cambiarMascota() {
     mascotaActual = selector.value;
     actualizarMascotaUI(mascotaActual);
     
-    // Guardar la mascota elegida en el perfil actual
     if(perfilesGuardados[perfilActualId]) {
         perfilesGuardados[perfilActualId].mascota = mascotaActual;
         guardarEnStorage();
@@ -533,36 +560,26 @@ function actualizarMascotaUI(mascotaStr) {
     petContainer.classList.add('theme-' + mascotaStr);
 
     switch(mascotaStr) {
-        case 'corgi':
-            saludoInicial = "¡Guau! ";
-            audioActual = new Audio('ladrido.mp3');
-            break;
-        case 'cat':
-            saludoInicial = "¡Miau! ";
-            audioActual = new Audio('miau.mp3');
-            break;
-        case 'panda':
-            saludoInicial = "¡Grrr! (Comiendo bambú) ";
-            audioActual = new Audio('panda.mp3');
-            break;
-        case 'fox':
-            saludoInicial = "¡Ring-ding-ding! ";
-            audioActual = new Audio('zorro.mp3');
-            break;
-        case 'lion':
-            saludoInicial = "¡Roar Operativo! ";
-            audioActual = new Audio('rugido.mp3');
-            break;
+        case 'corgi': saludoInicial = "¡Guau! "; audioActual = new Audio('ladrido.mp3'); break;
+        case 'cat': saludoInicial = "¡Miau! "; audioActual = new Audio('miau.mp3'); break;
+        case 'panda': saludoInicial = "¡Grrr! "; audioActual = new Audio('panda.mp3'); break;
+        case 'fox': saludoInicial = "¡Ring-ding-ding! "; audioActual = new Audio('zorro.mp3'); break;
+        case 'lion': saludoInicial = "¡Roar Operativo! "; audioActual = new Audio('rugido.mp3'); break;
     }
     audioActual.volume = 0.2;
 }
 
+let timeoutBurbuja;
+let isDraggingPet = false;
+let wasPetDragged = false;
+let startDragX, startDragY;
+let offsetX, offsetY;
+
 petContainer.addEventListener('mousedown', (e) => {
     isDraggingPet = true;
-    wasDragged = false;
+    wasPetDragged = false;
     startDragX = e.clientX;
     startDragY = e.clientY;
-
     const rect = petContainer.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
@@ -570,47 +587,33 @@ petContainer.addEventListener('mousedown', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     if (!isDraggingPet) return;
-
     if (Math.abs(e.clientX - startDragX) > 5 || Math.abs(e.clientY - startDragY) > 5) {
-        wasDragged = true;
+        wasPetDragged = true;
     }
-
-    if (wasDragged) {
-        petContainer.style.right = 'auto';
-        petContainer.style.bottom = 'auto';
+    if (wasPetDragged) {
+        petContainer.style.right = 'auto'; petContainer.style.bottom = 'auto';
         petContainer.style.left = `${e.clientX - offsetX}px`;
         petContainer.style.top = `${e.clientY - offsetY}px`;
     }
 });
 
-document.addEventListener('mouseup', () => {
-    isDraggingPet = false;
-});
+document.addEventListener('mouseup', () => { isDraggingPet = false; });
 
 const consejosMascota = [
     "Recuerda monitorear siempre el grupo de despachos críticos.",
     "¿Ya revisaste los folios que faltan por levantar hoy?",
     "Ojo con las detenciones, ¡que no se te pase ninguna!",
     "Si un folio no está informado a transporte, ¡levanta la alerta!",
-    "¡Revisa que los datos del SP estén correctos!.",
-    "Ojo con Leo, jefe del Equipo de Seguimiento 😉."
+    "Ojo con Leo, jefe del Equipo de Seguimiento."
 ];
 
 petContainer.addEventListener('click', (e) => {
-    if (wasDragged) {
-        wasDragged = false;
-        return; 
-    }
-
+    if (wasPetDragged) { wasPetDragged = false; return; }
     audioActual.currentTime = 0; 
-    audioActual.play().catch(() => console.log('Sin audio local para esta mascota.'));
-
-    const consejoAleatorio = consejosMascota[Math.floor(Math.random() * consejosMascota.length)];
-    petSpeech.innerText = saludoInicial + consejoAleatorio;
+    audioActual.play().catch(() => console.log('Sin audio local.'));
+    const consejo = consejosMascota[Math.floor(Math.random() * consejosMascota.length)];
+    petSpeech.innerText = saludoInicial + consejo;
     petSpeech.classList.remove('oculto');
-    
     clearTimeout(timeoutBurbuja);
-    timeoutBurbuja = setTimeout(() => {
-        petSpeech.classList.add('oculto');
-    }, 5500);
+    timeoutBurbuja = setTimeout(() => { petSpeech.classList.add('oculto'); }, 5500);
 });
