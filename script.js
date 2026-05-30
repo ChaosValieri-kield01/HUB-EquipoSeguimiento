@@ -398,7 +398,15 @@ function copiarMensaje(cardElement, index) {
 }
 
 let ventanasFlotantes = {};
+
 function abrirVentanaFlotante(url, winName) {
+    // MAGIA DE APERTURA INTELIGENTE: Si la ventana ya existe y no la han cerrado, 
+    // solo la traemos al frente, evitando que se recargue (vital para WhatsApp Web).
+    if (ventanasFlotantes[winName] && !ventanasFlotantes[winName].closed) {
+        ventanasFlotantes[winName].focus();
+        return;
+    }
+
     let width = 1100; let height = 750;
     
     // Tamaños personalizados según la herramienta
@@ -410,7 +418,10 @@ function abrirVentanaFlotante(url, winName) {
 
     const left = (screen.width - width) / 2; const top = (screen.height - height) / 2;
     ventanasFlotantes[winName] = window.open(url, winName, `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes`);
-    if (ventanasFlotantes[winName]) ventanasFlotantes[winName].focus();
+    
+    if (ventanasFlotantes[winName]) {
+        ventanasFlotantes[winName].focus();
+    }
 }
 
 function traerVentanaAlFrente(winName) {
@@ -516,8 +527,7 @@ const consejosMascota = [
     "¿Ya revisaste los folios que faltan por levantar hoy?",
     "Ojo con las detenciones, ¡que no se te pase ninguna!",
     "Si un folio no está informado a transporte, ¡levanta la alerta!",
-    "Ojo con Leo, jefe del Equipo de Seguimiento.",
-    "Cuando reactives un punto, no olvides colocarlo en la plantilla de comunicaciones."
+    "Ojo con Leo, jefe del Equipo de Seguimiento."
 ];
 
 petContainer.addEventListener('click', (e) => {
