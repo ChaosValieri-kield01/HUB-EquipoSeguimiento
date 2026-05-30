@@ -516,7 +516,8 @@ const consejosMascota = [
     "¿Ya revisaste los folios que faltan por levantar hoy?",
     "Ojo con las detenciones, ¡que no se te pase ninguna!",
     "Si un folio no está informado a transporte, ¡levanta la alerta!",
-    "Ojo con Leo, jefe del Equipo de Seguimiento."
+    "Ojo con Leo, jefe del Equipo de Seguimiento.",
+    "Cuando reactives un punto, no olvides colocarlo en la plantilla de comunicaciones."
 ];
 
 petContainer.addEventListener('click', (e) => {
